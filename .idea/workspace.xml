@@ -4,19 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e1c8e01-891d-48b0-98a2-27cc8b581dac" name="Changes" comment="Maha's files for the Homework and Lab assignmend September 6 (extra files)" />
+    <list default="true" id="5e1c8e01-891d-48b0-98a2-27cc8b581dac" name="Changes" comment="Maha's files for the Homework and Lab assignmend September 6">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coding.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--tags" />
-        <option name="title" value="All" />
-      </GitPushTagMode>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
@@ -58,21 +59,12 @@
       <option name="project" value="LOCAL" />
       <updated>1694109912846</updated>
     </task>
-    <task id="LOCAL-00002" summary="Maha's files for the Homework and Lab assignmend September 6 (extra files)">
-      <option name="closed" value="true" />
-      <created>1694111748464</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1694111748464</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Maha's files for the Homework and Lab assignmend September 6" />
-    <MESSAGE value="Maha's files for the Homework and Lab assignmend September 6 (extra files)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Maha's files for the Homework and Lab assignmend September 6 (extra files)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Maha's files for the Homework and Lab assignmend September 6" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
