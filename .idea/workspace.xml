@@ -6,22 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="5e1c8e01-891d-48b0-98a2-27cc8b581dac" name="Changes" comment="Adding file for lab">
       <changelist_data name="Maha" email="mahabasheikh@gmail.com" />
-      <change afterPath="$PROJECT_DIR$/src/Problem1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Problem2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Problem3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="MobileApp/master" />
@@ -54,18 +45,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/maha/Google Drive/School/YWCA/Class/MobileApp/Coding/src/Hwk_Sep6.java&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/maha/Google Drive/School/YWCA - Mobile App &amp; Azure Cloud Developer Training/Class/MobileApp/Coding/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;D:/maha/Google Drive/School/YWCA/Class/MobileApp/Coding/src/Hwk_Sep6.java&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/maha/Google Drive/School/YWCA/Class/MobileApp/Coding/src/Hwk_Sep6.java",
+    "onboarding.tips.debug.path": "D:/maha/Google Drive/School/YWCA - Mobile App & Azure Cloud Developer Training/Class/MobileApp/Coding/src/Main.java",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "two.files.diff.last.used.file": "D:/maha/Google Drive/School/YWCA/Class/MobileApp/Coding/src/Hwk_Sep6.java"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
@@ -115,51 +106,11 @@
     <option name="localTasksCounter" value="5" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="MobileApp/master" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="MobileApp/master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Maha's files for the Homework and Lab assignmend September 6" />
     <MESSAGE value="Maha's files for the Homework and Lab assignmend September 6 (extra files)" />
     <MESSAGE value="Adding file for homework" />
     <MESSAGE value="Adding file for lab" />
-    <MESSAGE value="11:59 update" />
-    <MESSAGE value="Adding extra files ??" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding extra files ??" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding file for lab" />
   </component>
 </project>
