@@ -1,26 +1,27 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+/*
+@ Maha Basheikh
+Date: September 6, 2023
+Homework 1
+ */
 public class Hwk_Sep6 {
-    public static void main(String[] args) {
-        /*
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
-         */
+     public static void main(String[] args) {
 
        // 1.) Initializing arrays with input values
-        int[] inputArray = {5, 3 , 9, 7, 4};
+
+         // Creating a Scanner object 'input' to get data from the user's keyboard
+         Scanner input = new Scanner(System.in);
+         System.out.println("Please enter 5 integers."); // user prompt
+
+         int[] inputArray = new int[5]; // initializing the array
+
+         // Populating the array with the user's input
+         for (int i = 0; i < inputArray.length; i++) {
+            inputArray[i] =  input.nextInt();
+         }
 
         // Printing out the above array by using the Array's class toString method
         System.out.println("Input Array: " + Arrays.toString(inputArray));
@@ -87,30 +88,40 @@ public class Hwk_Sep6 {
 
        // 7.) Random shuffling
         for (int i = 0; i < inputArray.length; i++) {
-            int randomIndexToSwap = random.nextInt(inputArray.length); //
-            int tempVariable = inputArray[randomIndexToSwap]; //
+            // Generating a pseudo-random number from 0 to the length of the array, and assigning that number to the
+            // random index
+            int randomIndexToSwap = random.nextInt(inputArray.length);
+            //Assigning the array value of that random index to a temp value
+            int tempVariable = inputArray[randomIndexToSwap];
+
+            //Assigning the current value of the iteration to the previously saved array value of the random index
             inputArray[randomIndexToSwap] = inputArray[i]; //
-            inputArray[i] = tempVariable; //
+
+            // Assigning the previously saved temp value to current value of the iteration (a swap algorithm with more
+            // than two values)
+            inputArray[i] = tempVariable;
         }
 
+        // Printing the value of the array after the shuffle
         System.out.println(Arrays.toString(inputArray));
 
        // 8.) Shifting elements
        //ArrayUtils.shift(randomArray, 3); Apache Java
 
-        //
+
         int tempVariable2 = randomArray[0]; // keeping the initial element to avoid an index out of bounds error
 
-        //
+        // Iterating through the array and shifting the elements one position to the left
         for (int i = 1; i < randomArray.length; i++) {
             randomArray[i - 1] = randomArray[i];
         }
 
-        //
+        // Restoring the initially saved value
         randomArray[randomArray.length - 1] = tempVariable2;
 
         // Printing the result
         System.out.println(Arrays.toString(randomArray));
+        input.close();
     }
 }
 

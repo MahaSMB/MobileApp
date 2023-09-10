@@ -1,41 +1,52 @@
+/*
+@ Maha Basheikh
+Date: September 6, 2023
+Problem 3
+ */
 public class Problem3 {
 
-2 public static void main(String[] args) {
-            3 final int NUMBER_OF_PRIMES = 50; // Number of primes to display
-            4 final int NUMBER_OF_PRIMES_PER_LINE = 10; // Display 10 per line
-            5 int count = 0; // Count the number of prime numbers
-            6 int number = 2; // A number to be tested for primeness
-            7
-            8 System.out.println("The first 50 prime numbers are \n");
-            9
-            10 // Repeatedly find prime numbers
-            11 while (count < NUMBER_OF_PRIMES) {
-                12 // Assume the number is prime
-                13 boolean isPrime = true; // Is the current number prime?
-                14
-                15 // Test whether number is prime
-                16 for (int divisor = 2; divisor <= number / 2; divisor++) {
-                    17 if (number % divisor == 0) { // If true, number is not prime
-                        18 isPrime = false; // Set isPrime to false
-                        19 break; // Exit the for loop
-                        20 }
-                    21 }
-                22
-                23 // Display the prime number and increase the count
-                24 if (isPrime) {
-                    25 count++; // Increase the count
-                    26
-                    27 if (count % NUMBER_OF_PRIMES_PER_LINE == 0) {
-                        28 // Display the number and advance to the new line
-                        29 System.out.println(number);
-                        30 }
-                    31 else
-                    32 System.out.print(number + " ");
-                    33 }
-                34
-                35 // Check if the next number is prime
-                36 number++;
-                37 }
-            38 }
-39 }
+public static void main(String[] args) {
+    int numOfPrimes = 50; // Number of prime numbers to show
+    int numOfPrimesPerLine = 10; // numbers per line
+    int count = 0; // counter to keep track of prime numbers
+    int number = 2; // We'll start testing every integer starting from 2
+
+    System.out.println("List of the first 50 prime numbers:  \r\n");
+
+    // While loop to go through each integer
+    while (count < numOfPrimes) {
+        // Assume the number is prime
+        boolean isPrime = true; // We initially assume the integer is a prime number
+
+        int divisor; // Declaring the divisor
+
+        // Iterating through every integer and testing whether they're prime by division
+        for (divisor = 2; divisor <= number / 2; divisor++) {
+            if (number % divisor == 0) { // If true, number is not prime
+               isPrime = false; // If we've ruled the number out as a prime number, we set it to false
+               break; // Exit the for loop to move onto the next integer
+               }
+           }
+
+       // If the integer is prime
+      if (isPrime) {
+          count++; // Increase the count (since we need 50 prime numbers)
+
+           if (count % numOfPrimesPerLine == 0) {
+                // Printing the prime number
+              System.out.println(number); // for the 10th number in the line, so the next line is a new line
+                }
+           else // Printing every non-10th number on the line
+           System.out.print(number + " ");
+           }
+
+       // Check if the next number is prime
+       number++;
+        }
+   }
 }
+
+/*
+Introduction to Java Programming: Eleventh Edition, Y. Daniel Liang
+Liang, Daniel. Introduction to Java Programming: Elevent Edition. Global Edition, Pearson, 2019
+ */
