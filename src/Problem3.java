@@ -37,7 +37,7 @@ public static void main(String[] args) {
               System.out.println(number); // for the 10th number in the line, so the next line is a new line
                 }
            else // Printing every non-10th number on the line
-           System.out.print(number + " ");
+                System.out.print(number + " ");
            }
 
        // Check if the next number is prime
