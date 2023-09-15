@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e1c8e01-891d-48b0-98a2-27cc8b581dac" name="Changes" comment="Version submitted">
-      <change beforePath="$PROJECT_DIR$/src/Problem3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Problem3.java" afterDir="false" />
-    </list>
+    <list default="true" id="5e1c8e01-891d-48b0-98a2-27cc8b581dac" name="Changes" comment="Commiting to main" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +19,13 @@
   </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="MobileApp/master" />
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="OPTIONS">
+      <set>
+        <option value="REBASE" />
+      </set>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -46,7 +51,9 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2V4xn5EWivxEXv6i83QeeRUlY4f" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -100,6 +107,19 @@
     <configuration name="Problem4" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Problem4" />
       <module name="Coding" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Coding" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Coding" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -229,6 +249,7 @@
     <MESSAGE value="Adding extra files ??" />
     <MESSAGE value="Trying to push" />
     <MESSAGE value="Version submitted" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version submitted" />
+    <MESSAGE value="Commiting to main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commiting to main" />
   </component>
 </project>
