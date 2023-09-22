@@ -29,7 +29,7 @@ int main(int argc, const char * argv[]) {
         
         // creating the for loop
         for (int i = 0; i < (sizeof(inputArray)/sizeof(inputArray[0])); i++) {
-            printf("inputArray[%d]=", i); //prompting the user
+            NSLog(@"inputArray[%d]=", i); //prompting the user
             scanf("%d", &inputArray[i]); // reading the screen with the user's input and initializing the array
         }
     
@@ -43,21 +43,21 @@ int main(int argc, const char * argv[]) {
         for (int i = 0; i < (sizeof(randomArray)/sizeof(randomArray[0])); i++) {
             randomValue = lowerBound + arc4random() % (upperBound - lowerBound); // initializing a random value with the bounds set
             randomArray[i] = randomValue; // using the random value to initialize the array
-            printf("\nrandomArray[%d]=", randomValue); // printing the value so we can see it
+            NSLog(@"\nrandomArray[%d]=", randomValue); // printing the value so we can see it
         }
         
         // 3. Printing arrays
         
-        printf("\n");
+        NSLog(@"\n");
         
         for (int i = 0; i < 5; i++) {
-            printf("inputArray[%d]= %d\n", i, inputArray[i]); // printing the input array value in a for loop
+            NSLog(@"inputArray[%d]= %d\n", i, inputArray[i]); // printing the input array value in a for loop
         }
         
-        printf("\n");
+        NSLog(@"\n");
         
         for (int i = 0; i < 5; i++) {
-            printf("randomArray[%d]= %d\n", i, randomArray[i]); // printing the random array value in a for loop
+            NSLog(@"randomArray[%d]= %d\n", i, randomArray[i]); // printing the random array value in a for loop
         }
         // 4. Summing all elements
         
@@ -69,9 +69,9 @@ int main(int argc, const char * argv[]) {
             arrayTotal += inputArray[i];
         }
         
-        printf("The inputArray total is: %d", arrayTotal); // printing the value to the screen
+        NSLog(@"The inputArray total is: %d", arrayTotal); // printing the value to the screen
         
-        printf("\n"); // creating a new line for readibility
+        NSLog(@"\n"); // creating a new line for readibility
         
         // 5. Finding the largest element
         int maxElement = 0; //initializing a max value
@@ -82,8 +82,8 @@ int main(int argc, const char * argv[]) {
             if (randomArray[i] > maxElement) maxElement = randomArray[i]; // if the value is higher than the already set maxElement, set as new maxElement
         }
         
-        printf("For the randomArray largest element is %d", maxElement); // print the maxElement
-        printf("\n");
+        NSLog(@"For the randomArray largest element is %d", maxElement); // print the maxElement
+        NSLog(@"\n");
         
         // 6. Finding the smallest index of the largest element
         
@@ -103,14 +103,14 @@ int main(int argc, const char * argv[]) {
             }
         }
         
-        printf("\nFor the following array:\r\n");
+        NSLog(@"\nFor the following array:\r\n");
         
         for (int i = 0; i < (sizeof(repeatingMaxValue)/sizeof(repeatingMaxValue[0])); i++) { // printing the array so we can see what the array is
-            printf("\nrepeatingMaxValue[%d]=", randomArray[i]);
+            NSLog(@"\nrepeatingMaxValue[%d]=", randomArray[i]);
         }
         
-        printf("The smallest index is %d", smallestIndex); // printing out what the smallest index is
-        printf("\n");
+        NSLog(@"The smallest index is %d", smallestIndex); // printing out what the smallest index is
+        NSLog(@"\n");
         
         // 7. Random shuffling
         lowerBound = 0; // using the same lower bound as before
@@ -125,10 +125,10 @@ int main(int argc, const char * argv[]) {
         }
         
         // Printing the result
-        printf("\n");
+        NSLog(@"\n");
         
         for (int i = 0; i < (sizeof(randomArray)/sizeof(randomArray[0])); i++) {
-            printf("\nrandomArray[%d]=", randomArray[i]); // printing the result of the shifting elements
+            NSLog(@"\nrandomArray[%d]=", randomArray[i]); // printing the result of the shifting elements
         }
         
         
@@ -143,10 +143,10 @@ int main(int argc, const char * argv[]) {
         }
         inputArray[INPUTARRAYLENGTH - 1] = temp; // restoring the first value of the array
         
-        printf("\n");
+        NSLog(@"\n");
         
         for (int i = 0; i < (INPUTARRAYLENGTH); i++) {
-            printf("\ninputArray[%d]=", inputArray[i]); // printing the result of the shifting
+            NSLog(@"\ninputArray[%d]=", inputArray[i]); // printing the result of the shifting
         }
         
     }
