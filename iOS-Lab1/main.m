@@ -1,18 +1,25 @@
 //
 //  main.m
-//  iOS-Lab1
+//  Sep21iosLab1
 //
-//  Created by user248611 on 9/22/23.
+//  Created by Nazia Ahmed on 2023-09-21.
 //
 
-#import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+#import <Foundation/Foundation.h>
+#import "CalBrain.h"
 
-int main(int argc, char * argv[]) {
-    NSString * appDelegateClassName;
+
+int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // Setup code that might create autoreleased objects goes here.
-        appDelegateClassName = NSStringFromClass([AppDelegate class]);
+        CalBrain *myCal = [[CalBrain alloc]init];
+        
+        [myCal pushItem:0];
+        [myCal pushItem:100];
+        
+        double result = [myCal calculate:@"/"];
+        
+        NSLog(@"result is %f",result);
+        
     }
-    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
+    return 0;
 }
