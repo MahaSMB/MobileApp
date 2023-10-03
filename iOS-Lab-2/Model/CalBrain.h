@@ -1,6 +1,6 @@
 //
 //  CalBrain.h
-//  Sep21_Calculator
+//  
 //
 //  Created by Maha Basheikh on 2023-09-21.
 //
