@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  Calculator_MahaB
+//  PersonalityQuiz_MahaB
 //
-//  Created by Maha Basheikh on 2023-10-05.
+//  Created by Maha Basheikh on 2023-10-07.
 //
 
 import UIKit
