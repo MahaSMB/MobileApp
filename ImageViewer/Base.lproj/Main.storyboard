@@ -33,6 +33,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="myImage" destination="dwZ-CP-bPs" id="5ay-V4-Twr"/>
                         <outlet property="pickerView" destination="5BT-nn-HOW" id="fAa-UV-3sm"/>
                     </connections>
                 </viewController>
