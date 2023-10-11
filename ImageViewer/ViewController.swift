@@ -8,15 +8,13 @@
 import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    //var URLStr: URL?
+
     lazy var myDictionary = Model()
     var chosenRow = -1
-    //lazy var sharedService = Service()
-    
-    // UISwipeGestureRecognizer
-    
+
     lazy var myList = Array(myDictionary.listOfImages)
 
+    @IBOutlet weak var activIndic: UIActivityIndicatorView!
     @IBOutlet var swipeGestureItem: UISwipeGestureRecognizer!
     @IBOutlet weak var myImage: UIImageView!
     @IBOutlet weak var pickerView: UIPickerView!
@@ -26,7 +24,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         //UIImage has user interaction disabled by default
         myImage.isUserInteractionEnabled = true
-        
+
         myImage.addGestureRecognizer(createSwipeGestureRecognizer(for: .left))
         myImage.addGestureRecognizer(createSwipeGestureRecognizer(for: .right))
         
@@ -55,9 +53,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                     inComponent component: Int) {
         //let rowStr = String (myList[row].key)
         let myURLStr = (myList[row].value)  // prints the value of the myDictionary
-        self.chosenRow = Int (row) // setting a variable that can be accessed outside of this function
+        chosenRow = Int (row) // setting a variable that can be accessed outside of this function
         //print(myURLStr) // testing to see what myURLStr prints
-                
+
+        activIndic.startAnimating()
+        activIndic.stopAnimating()
+        activIndic.hidesWhenStopped = true
+        
+        
         //self.myImage.image = getArrayImage(myURLStr)
         Service.shared.getImage(urlStr: myURLStr) { data in
             if let data = data {
@@ -82,53 +85,68 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @objc func didSwipe(_ sender: UISwipeGestureRecognizer) {
        
-        var frame = myImage.frame
+        //var frame = myImage.frame
         
         switch sender.direction {
         case .left:
-            frame.origin.x -= 100.0
-            frame.origin.x = max(0.0, frame.origin.x)
-            let myURLStr = myList[chosenRow - 1].value
+//            frame.origin.x -= 100.0
+//            frame.origin.x = max(0.0, frame.origin.x)
+            
+            if chosenRow > 0 {
+                chosenRow -= 1
+            }
+            //let myURLStr = myList[chosenRow - 1].value
             // Changing to the image prior
            
-            Service.shared.getImage(urlStr: myURLStr) { data in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        [unowned self] in
-                        self.myImage.image = UIImage(data: data)
-                    }
-                }
-            }
+//            Service.shared.getImage(urlStr: myURLStr) { data in
+//                if let data = data {
+//                    DispatchQueue.main.async {
+//                        [unowned self] in
+//                        self.myImage.image = UIImage(data: data)
+//                    }
+//                }
+//            }
             // Updating the Picker View to reflect
-            pickerView.selectRow(chosenRow, inComponent: 0, animated: true)
-            pickerView.reloadAllComponents()
+//            pickerView.selectRow(chosenRow, inComponent: 0, animated: true)
+//            pickerView.reloadAllComponents()
         case .right:
-            frame.origin.x += 100.0
             
-            if frame.maxX > view.bounds.maxX {
-                frame.origin.x = view.bounds.width - frame.width
+            if chosenRow < myList.count - 1 {
+                chosenRow += 1
             }
+//            frame.origin.x += 100.0
+//
+//            if frame.maxX > view.bounds.maxX {
+//                frame.origin.x = view.bounds.width - frame.width
+//            }
             // changing to the image after
-            let myURLStr = myList[chosenRow - 1].value
+            //let myURLStr = myList[chosenRow - 1].value
             // Changing to the image prior
             
-            Service.shared.getImage(urlStr: myURLStr) { data in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        [unowned self] in
-                        self.myImage.image = UIImage(data: data)
-                    }
-                }
-            }
+//            Service.shared.getImage(urlStr: myURLStr) { data in
+//                if let data = data {
+//                    DispatchQueue.main.async {
+//                        [unowned self] in
+//                        self.myImage.image = UIImage(data: data)
+//                    }
+//                }
+//            }
             // Change the row of the Picker View
             pickerView.selectRow(chosenRow, inComponent: 0, animated: true)
             pickerView.reloadAllComponents()
         default:
             break
         }
+        pickerView.selectRow(chosenRow, inComponent: 0, animated: true)
         
-        UIImageView.animate(withDuration: 0.25) {
-            self.myImage.frame = frame
+        let myURLStr = (myList[chosenRow].value)  // prints the value of the myDictionary
+        Service.shared.getImage(urlStr: myURLStr) { data in
+            if let data = data {
+                DispatchQueue.main.async {
+                    [unowned self] in
+                    self.myImage.image = UIImage(data: data)
+                }
+            }
         }
     }
     

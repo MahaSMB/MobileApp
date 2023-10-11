@@ -32,6 +32,10 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="7f9-BP-PTa"/>
                                 </connections>
                             </pickerView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="NOg-kS-WSi">
+                                <rect key="frame" x="202" y="364" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -41,6 +45,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="activIndic" destination="NOg-kS-WSi" id="Ryc-ql-X8g"/>
                         <outlet property="myImage" destination="dwZ-CP-bPs" id="5ay-V4-Twr"/>
                         <outlet property="pickerView" destination="5BT-nn-HOW" id="fAa-UV-3sm"/>
                         <outlet property="swipeGestureItem" destination="A4r-mx-XUj" id="T6Q-jN-7LF"/>
@@ -49,7 +54,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="A4r-mx-XUj"/>
             </objects>
-            <point key="canvasLocation" x="-309" y="143"/>
+            <point key="canvasLocation" x="-383" y="104"/>
         </scene>
     </scenes>
     <resources>
