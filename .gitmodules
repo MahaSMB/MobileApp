@@ -1,0 +1,9 @@
+[submodule "iOSLab1"]
+	path = iOSLab1
+	url = https://github.com/MahaSMB/MobileApp.git
+[submodule "iOSLab2"]
+	path = iOSLab2
+	url = https://github.com/MahaSMB/MobileApp.git
+[submodule "iOSLab3"]
+	path = iOSLab3
+	url = https://github.com/MahaSMB/MobileApp.git
