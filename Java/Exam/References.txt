@@ -1,0 +1,10 @@
+Exam References
+
+Problem 26
+https://www.techiedelight.com/perform-division-two-numbers-without-using-division-operator/
+https://www.w3schools.com/java/java_files_create.asp
+
+
+Problem 31
+http://gcmuganda.faculty.noctrl.edu/classes/Winter11/161/Labs/Lab4_2Website/HtmlPage.htm
+https://www.w3schools.com/java/java_files_read.asp
