@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Lab 1: Maha Basheikh</string>
+    <string name="enter_name">\n
+        \t\t\tEnter Your Name: \n\n
+        \t\t________________________\n\n
+    \t\t\tEnter Your Password:\n\n
+    \t\t________________________\n</string>
+    <string name="enter_password">Enter Your Password</string>
+    <string name="halloweencookies">Halloween Cookies</string>
+    <string name="ghosts">Halloween Ghosts</string>
+    <string name="jackolanterns">Jack-o-lantern</string>
+</resources>
