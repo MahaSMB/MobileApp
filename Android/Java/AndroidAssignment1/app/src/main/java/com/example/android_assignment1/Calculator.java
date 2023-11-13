@@ -132,8 +132,14 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         else if (id == R.id.buttonEquals) {
             //answerLineTextView.append("=");
             push(answerLineTextView.getText().toString()); // push user's entered value
-            result = calculate();
-            answerLineTextView.setText(answerLineTextView.getText().toString() + "=" + String.valueOf(result));
+            if (numberError || operatorError) {
+                Toast.makeText(this, R.string.alertMessageValidationFailedEnterNewValue, Toast.LENGTH_LONG).show();
+                clearAnswerLine();
+            }
+            else {
+                result = calculate();
+                answerLineTextView.setText(answerLineTextView.getText().toString() + "=" + String.valueOf(result));
+            }
         }
         else if (id == R.id.buttonClear) {
             clearAnswerLine();
@@ -163,14 +169,18 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
     void validate (String answerLine) {
         // Make sure the entered line to calculate is valid
         char[] chars = answerLine.toCharArray();
-        for (int i = 0; i < chars.length && !numberError; i += 2) {
+        for (int i = 0; i < chars.length; i += 2) {
             // Starting from the first character, for every second character, make sure the
             // character is a digit and that every other character is not a digit
             if (Character.isDigit(chars[i]) || !Character.isDigit(chars[i + 1])) {
                 // This is a valid string so far. We accept the input and thus do nothing.
+                numberError = false;
+                operatorError = false;
             }
             else {
                 numberError = true; // Set to true if the above case is FALSE as it's not a valid string
+                operatorError = true;
+                Toast.makeText(this, R.string.alertMessageValidationFailedNumberOrOperatorError, Toast.LENGTH_LONG).show();
             }
         }
         for(int i = 0; i < chars.length; i++) {
@@ -193,14 +203,14 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
                         else {
                             //equal sign is not valid
                             Toast.makeText(this, R.string.alertMessageEqualSignInvalidPosition, Toast.LENGTH_LONG).show();
-                            clearAnswerLine();
+                            //clearAnswerLine();
                         }
                         break;
                     default:
                         // nonDigit character is not an operator
                         operatorError = true;
                         Toast.makeText(this, R.string.alertMessageNonDigitCharacterNotOperator, Toast.LENGTH_LONG).show();
-                        clearAnswerLine();
+                        //clearAnswerLine();
                         break;
                 }
             }
@@ -229,6 +239,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
                 }
                 else { // when i == 2
                     secondNumber = Integer.parseInt(String.valueOf(chars[i]));
+                    operator = chars[i - 1];
                     numberFound = true;
                 }
             }
@@ -236,7 +247,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
                 operator = chars[i - 1];
                 operatorFound = true;
             }
-            else if (!Character.isDigit(chars[i]) && chars[i] == ('=')){
+            else if (!Character.isDigit(chars[i]) && chars[i] == ('=')){ /* not needed. delete */
                 operator = chars[i];
                 operatorFound = true;
             }
@@ -254,7 +265,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
                         numberError = true;
                         Toast.makeText(this, R.string.alertMessageDivisionByZero, Toast.LENGTH_LONG).show();
                         clearAnswerLine();
-                        return -3;
+                        return -1;
                     }
                     else {
                         result = firstNumber / secondNumber;
@@ -271,8 +282,6 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
                 default:
                     break;
             }
-            //operator = chars[i + 2];
-            //firstNumber = result;
         }
         if (numberError || operatorError) {
             Toast.makeText(this, R.string.alertMessageNumberOrOperatorError, Toast.LENGTH_LONG).show();
@@ -280,7 +289,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
             return -4;
         }
         else {
-            Toast.makeText(this, R.string.alertMessageUnknownError, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, R.string.alertMessageUnknownError, Toast.LENGTH_LONG).show();
             return result;
         }
 

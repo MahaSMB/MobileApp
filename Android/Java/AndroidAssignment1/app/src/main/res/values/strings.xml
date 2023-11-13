@@ -31,4 +31,6 @@
     <string name="alertMessageDivisionByZero">Division by zero is not permitted!</string>
     <string name="alertMessageUnknownError">Unknown Error</string>
     <string name="alertMessageNumberOrOperatorError">Number or Operator error!</string>
+    <string name="alertMessageValidationFailedNumberOrOperatorError">Validation Failed! Number or Operator error!</string>
+    <string name="alertMessageValidationFailedEnterNewValue">Validation failed! Please enter a new value</string>
 </resources>
