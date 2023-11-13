@@ -25,4 +25,10 @@
     <string name="advanced">ADVANCED - WITH HISTORY</string>
     <string name="alertMessageOneDigit">Only one digit operands allowed!</string>
     <string name="alertMessageOneOperator">Only one character operator is allowed!</string>
+    <string name="alertMessageEqualSignInvalidPosition">You have entered \'=\' in an invalid position!</string>
+    <string name="alertMessageInvalidValue">You have entered an invalid equation. Please re-enter!</string>
+    <string name="alertMessageNonDigitCharacterNotOperator">You have entered a non-numerical character that is not an operator!</string>
+    <string name="alertMessageDivisionByZero">Division by zero is not permitted!</string>
+    <string name="alertMessageUnknownError">Unknown Error</string>
+    <string name="alertMessageNumberOrOperatorError">Number or Operator error!</string>
 </resources>

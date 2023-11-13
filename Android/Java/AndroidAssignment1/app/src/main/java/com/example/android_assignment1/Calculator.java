@@ -15,9 +15,10 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
     int firstNumber = 0, secondNumber = 0, result = 0;
     char operator;
     boolean operatorFound = false, numberFound = false, operatorError = false, numberError = false;
+    boolean validEqualSignEntered = false, validValue = false;
 
     String answerLine = "";
-
+    //char[] answerLineChars = null;
 
     // Number buttons
     Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button0 ;
@@ -87,116 +88,52 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         int id = view.getId();
         int answerLength = answerLineTextView.length();
         if (id == R.id.button1) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("1");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }
+            answerLineTextView.append("1");
         }
         else if (id == R.id.button2) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("2");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }        }
+            answerLineTextView.append("2");
+        }
         else if (id == R.id.button3) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("3");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }        }
+            answerLineTextView.append("3");
+        }
         else if (id == R.id.button4) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("4");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }        }
+            answerLineTextView.append("4");
+        }
         else if (id == R.id.button5) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("5");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }        }
+            answerLineTextView.append("5");
+        }
         else if (id == R.id.button6) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("6");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }        }
+            answerLineTextView.append("6");
+        }
         else if (id == R.id.button7) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("7");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }        }
+            answerLineTextView.append("7");
+        }
         else if (id == R.id.button8) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("8");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }        }
+            answerLineTextView.append("8");
+        }
         else if (id == R.id.button9) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("9");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }        }
+            answerLineTextView.append("9");
+        }
         else if (id == R.id.button0) {
-            if (answerLength == 0 || !Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("0");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneDigit, Toast.LENGTH_LONG).show();
-            }
+            answerLineTextView.append("0");
         }
         else if (id == R.id.buttonMultiply) {
-            if (answerLength == 1 || Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("*");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneOperator, Toast.LENGTH_LONG).show();
-            }
+            answerLineTextView.append("*");
         }
         else if (id == R.id.buttonDivide) {
-            if (answerLength == 1 || Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("/");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneOperator, Toast.LENGTH_LONG).show();
-            }
+            answerLineTextView.append("/");
         }
         else if (id == R.id.buttonPlus) {
-            if (answerLength == 1 || Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("+");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneOperator, Toast.LENGTH_LONG).show();
-            }
+            answerLineTextView.append("+");
         }
         else if (id == R.id.buttonMinus) {
-            if (answerLength == 1 || Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                answerLineTextView.append("-");
-            }
-            else {
-                Toast.makeText(this, R.string.alertMessageOneOperator, Toast.LENGTH_LONG).show();
-            }
+            answerLineTextView.append("-");
         }
         else if (id == R.id.buttonEquals) {
-            if (answerLength == 3 || Character.isDigit(answerLineTextView.getText().charAt(answerLength - 1))) {
-                calculate();
-            }
-            else {
-                //Toast.makeText(this, R.string.alertMessageOneOperator, Toast.LENGTH_LONG).show();
-            }
+            //answerLineTextView.append("=");
+            push(answerLineTextView.getText().toString()); // push user's entered value
+            result = calculate();
+            answerLineTextView.setText(answerLineTextView.getText().toString() + "=" + String.valueOf(result));
         }
         else if (id == R.id.buttonClear) {
             clearAnswerLine();
@@ -207,11 +144,12 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         else {
             // do nothing
         }
+
     }
 
     /* TO DO
     // Think about turning answer string into ArrayList
-    // Have answer string/ArrayList in a MyApp class to have persistent data
+    // Have answer string/ArrayList in a MyApp class to have global data
     // Make sure layout is good in landscape mode (make a new XML file)
     // icon
 
@@ -219,11 +157,133 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     void push (String text) {
         answerLine += text;
+        validate(answerLine);
     }
 
+    void validate (String answerLine) {
+        // Make sure the entered line to calculate is valid
+        char[] chars = answerLine.toCharArray();
+        for (int i = 0; i < chars.length && !numberError; i += 2) {
+            // Starting from the first character, for every second character, make sure the
+            // character is a digit and that every other character is not a digit
+            if (Character.isDigit(chars[i]) || !Character.isDigit(chars[i + 1])) {
+                // This is a valid string so far. We accept the input and thus do nothing.
+            }
+            else {
+                numberError = true; // Set to true if the above case is FALSE as it's not a valid string
+            }
+        }
+        for(int i = 0; i < chars.length; i++) {
+            // Starting from the first character, search for an operator
+            if (!Character.isDigit(chars[i])) { // Every operator will be at an odd-numbered index
+                switch (chars[i]) {
+                    case '*':
+                    case '/':
+                    case '+':
+                    case '-':
+                        operatorFound = true;
+                        operator = chars[i];
+                        break;
+                    case '=':
+                        if (i > 2) {
+                            // Every equal sign will be at an odd-numbered index and at least and index of 3
+                            validEqualSignEntered = true;
+                            validValue = true;
+                        }
+                        else {
+                            //equal sign is not valid
+                            Toast.makeText(this, R.string.alertMessageEqualSignInvalidPosition, Toast.LENGTH_LONG).show();
+                            clearAnswerLine();
+                        }
+                        break;
+                    default:
+                        // nonDigit character is not an operator
+                        operatorError = true;
+                        Toast.makeText(this, R.string.alertMessageNonDigitCharacterNotOperator, Toast.LENGTH_LONG).show();
+                        clearAnswerLine();
+                        break;
+                }
+            }
+            else if (Character.isDigit(chars[i])) {
+                numberFound = true;
+            }
+            else {
+                //operatorError = true;
+                operatorFound = false;
+            }
+        }
+    }
     int calculate(){
         char[] chars = answerLine.toCharArray();
-        return 0;
+        if(Character.isDigit(chars[0]) && !numberError ) {
+            firstNumber = Integer.parseInt(String.valueOf(chars[0]));
+            //operator = chars[1];
+        }
+        for (int i = 2; i < chars.length; i += 2) {
+            if(Character.isDigit(chars[i])) {
+                if (i > 2) {
+                    firstNumber = result;
+                    secondNumber = Integer.parseInt(String.valueOf(chars[i]));
+                    operator = chars[i - 1];
+                    numberFound = true;
+                }
+                else { // when i == 2
+                    secondNumber = Integer.parseInt(String.valueOf(chars[i]));
+                    numberFound = true;
+                }
+            }
+            else if (!Character.isDigit(chars[i - 1])){ /* not needed. delete */
+                operator = chars[i - 1];
+                operatorFound = true;
+            }
+            else if (!Character.isDigit(chars[i]) && chars[i] == ('=')){
+                operator = chars[i];
+                operatorFound = true;
+            }
+            else {
+                Toast.makeText(this, R.string.alertMessageNonDigitCharacterNotOperator, Toast.LENGTH_LONG).show();
+                clearAnswerLine();
+                return -2;
+            }
+            switch (operator) {
+                case '*':
+                    result = firstNumber * secondNumber;
+                    break;
+                case '/':
+                    if (secondNumber == 0) {
+                        numberError = true;
+                        Toast.makeText(this, R.string.alertMessageDivisionByZero, Toast.LENGTH_LONG).show();
+                        clearAnswerLine();
+                        return -3;
+                    }
+                    else {
+                        result = firstNumber / secondNumber;
+                    }
+                    break;
+                case '+':
+                    result = firstNumber + secondNumber;
+                    break;
+                case '-':
+                    result = firstNumber - secondNumber;
+                    break;
+                case '=':
+                    return result;
+                default:
+                    break;
+            }
+            //operator = chars[i + 2];
+            //firstNumber = result;
+        }
+        if (numberError || operatorError) {
+            Toast.makeText(this, R.string.alertMessageNumberOrOperatorError, Toast.LENGTH_LONG).show();
+            clearAnswerLine();
+            return -4;
+        }
+        else {
+            Toast.makeText(this, R.string.alertMessageUnknownError, Toast.LENGTH_LONG).show();
+            return result;
+        }
+
     }
 //
 //    void getResult() {
@@ -232,6 +292,8 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 //
     void clearAnswerLine() {
         answerLineTextView.setText("");
+        answerLine = "";
+        result = 0;
     }
 //
 //    void showHistory() {

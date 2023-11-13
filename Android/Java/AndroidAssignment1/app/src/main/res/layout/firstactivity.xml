@@ -18,10 +18,11 @@
     <TextView
         android:id="@+id/answerLineTextView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="75dp"
         android:gravity="end"
         android:text="@string/answer"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="50sp"
         tools:ignore="RtlHardcoded" >
     </TextView>
     <LinearLayout
