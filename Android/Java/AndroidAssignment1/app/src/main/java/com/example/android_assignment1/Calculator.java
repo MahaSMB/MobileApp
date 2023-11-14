@@ -161,6 +161,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
                     index = ((MyApp)getApplication()).index;
                     textViewHistory.append(calculations + "\n");
                 }
+
             }
         }
         else if (id == R.id.buttonClear) {
