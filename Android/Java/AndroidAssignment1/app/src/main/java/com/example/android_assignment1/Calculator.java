@@ -97,7 +97,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     }
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -173,17 +173,17 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         else if (id == R.id.buttonAdvanced) {
             if (advancedButtonEnabled) {
                 advancedButtonEnabled = false;
-                buttonAdvanced.setText(R.string.standard_no_history);
+                buttonAdvanced.setText(R.string.advanced);
                 hideHistory();
             }
             else {
                 advancedButtonEnabled = true;
-                buttonAdvanced.setText(R.string.advanced);
+                buttonAdvanced.setText(R.string.standard_no_history);
                 showHistory();
             }
         }
         else {
-            // do nothing
+            Toast.makeText(this, R.string.alertMessageUnknownError, Toast.LENGTH_LONG).show();
         }
 
     }
@@ -198,7 +198,6 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     void push (String text) {
         answerLine += text;
-        //MyApp application = (MyApp) getApplication();
         validate(answerLine);
     }
 
