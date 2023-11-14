@@ -1,6 +1,6 @@
 package com.example.android_assignment1;
 
-import android.annotation.SuppressLint;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +20,6 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
     boolean validEqualSignEntered = false, validValue = false;
 
     String answerLine = "";
-    //char[] answerLineChars = null;
 
     // Number buttons
     Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button0 ;
@@ -36,7 +35,6 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     // TextView
     TextView answerLineTextView, textViewHistory;
-    //Configuration newConfig2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +92,12 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         buttonEquals.setOnClickListener(this);
         buttonClear.setOnClickListener(this);
         buttonAdvanced.setOnClickListener(this);
-
     }
 
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        int answerLength = answerLineTextView.length();
         if (id == R.id.button1) {
             answerLineTextView.append("1");
         }
@@ -154,7 +150,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
             else {
                 result = calculate();
 
-                String calculations = answerLineTextView.getText().toString() + "=" + String.valueOf(result);
+                String calculations = answerLineTextView.getText().toString() + "=" + (result);
                 answerLineTextView.setText(calculations);
                 // push previous line into string to save into ArrayList of strings
                 ((MyApp)getApplication()).getPrevOperations().add(calculations);
@@ -180,6 +176,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
                 advancedButtonEnabled = true;
                 buttonAdvanced.setText(R.string.standard_no_history);
                 showHistory();
+                getHistory();
             }
         }
         else {
@@ -187,14 +184,6 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         }
 
     }
-
-    /* TO DO
-    // Think about turning answer string into ArrayList (skip)
-    // Have answer string/ArrayList in a MyApp class to have global data
-    // Make sure layout is good in landscape mode (make a new XML file) (done)
-    // icon (done)
-
-     */
 
     void push (String text) {
         answerLine += text;
@@ -329,11 +318,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         }
 
     }
-//
-//    void getResult() {
-//
-//    }
-//
+
     void clearAnswerLine() {
         answerLineTextView.setText("");
         answerLine = "";
@@ -346,5 +331,14 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     void hideHistory() {
         textViewHistory.setVisibility(View.INVISIBLE);
+    }
+
+    void getHistory() {
+        listOfOperations = ((MyApp)getApplication()).getPrevOperations();
+        //textViewHistory.setText(listOfOperations.);
+        for (int i = 0; i < listOfOperations.size(); i++) {
+            String operation = listOfOperations.get(i);
+            textViewHistory.setText(operation + "\n");
+        }
     }
 }

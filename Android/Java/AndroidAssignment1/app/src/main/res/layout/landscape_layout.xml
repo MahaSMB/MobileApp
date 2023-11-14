@@ -7,237 +7,263 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/answerLineTextView"
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:gravity="end"
-        android:text="@string/answer"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="50sp"
-        tools:ignore="RtlHardcoded"></TextView>
-
-    <LinearLayout
-        style="?android:attr/buttonBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="start"
-        android:orientation="vertical">
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             style="?android:attr/buttonBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="360dp"
+            android:layout_height="match_parent"
+
             android:layout_gravity="start"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button1"
-                style="?android:attr/buttonBarButtonStyle"
+            <TextView
+                android:id="@+id/answerLineTextView"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_gravity="start"
+                android:text="@string/answer"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="50sp"
+                tools:ignore="RtlHardcoded"></TextView>
+
+
+            <LinearLayout
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
+                android:layout_gravity="start"
                 android:orientation="horizontal"
-                android:text="@string/one"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <Button
+                    android:id="@+id/button1"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:orientation="horizontal"
+                    android:text="@string/one"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/button2"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/two"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/button3"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/three"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/buttonMultiply"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/multiply"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <Button
+                    android:id="@+id/button4"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:orientation="horizontal"
+                    android:text="@string/four"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/button5"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/five"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/button6"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/six"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/buttonMinus"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/minus"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <Button
+                    android:id="@+id/button7"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:orientation="horizontal"
+                    android:text="@string/seven"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/button8"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/eight"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/button9"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/nine"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/buttonPlus"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/plus"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <Button
+                    android:id="@+id/buttonClear"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:orientation="horizontal"
+                    android:text="@string/clear"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/button0"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/zero"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/buttonEquals"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/equals"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/buttonDivide"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/ForestGreen"
+                    android:text="@string/divide"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </LinearLayout>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/buttonAdvanced"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/two"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/button3"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/three"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/buttonMultiply"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/multiply"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
+                android:layout_gravity="end"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/navy"
+                android:paddingHorizontal="60dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/advanced" />
         </LinearLayout>
 
         <LinearLayout
             style="?android:attr/buttonBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="214dp"
+            android:layout_weight="1"
 
-            <Button
-                android:id="@+id/button4"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:orientation="horizontal"
-                android:text="@string/four"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:orientation="horizontal"
+            tools:ignore="NestedWeights">
 
-            <Button
-                android:id="@+id/button5"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/five"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/button6"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/six"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/buttonMinus"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/minus"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
+            <TextView
+                android:id="@+id/textViewHistory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginTop="5dp"
+                android:background="@color/PowderBlue"
+                android:lines="12"
+                android:maxLines="12"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20sp" />
         </LinearLayout>
 
-        <LinearLayout
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button7"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:orientation="horizontal"
-                android:text="@string/seven"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/button8"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/eight"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/button9"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/nine"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/buttonPlus"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/plus"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonClear"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:orientation="horizontal"
-                android:text="@string/clear"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/button0"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/zero"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/buttonEquals"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/equals"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/buttonDivide"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/ForestGreen"
-                android:text="@string/divide"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/buttonAdvanced"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/navy"
-            android:text="@string/advanced" />
     </LinearLayout>
-
-    <LinearLayout
-        style="?android:attr/buttonBarStyle"
-        android:layout_width="392dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/textViewHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/PowderBlue"
-            android:layout_gravity="end"
-            android:layout_marginTop="5dp"
-            android:lines="12"
-            android:maxLines="12"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
 </LinearLayout>
