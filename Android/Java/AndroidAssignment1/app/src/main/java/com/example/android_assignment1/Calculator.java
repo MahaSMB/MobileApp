@@ -1,5 +1,6 @@
 package com.example.android_assignment1;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -72,6 +73,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
         answerLineTextView = findViewById(R.id.answerLineTextView);
         textViewHistory = findViewById(R.id.textViewHistory);
+        textViewHistory.setVisibility(View.INVISIBLE);
 
         button0.setOnClickListener(this);
         button1.setOnClickListener(this);
@@ -95,6 +97,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -154,13 +157,30 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
                 String calculations = answerLineTextView.getText().toString() + "=" + String.valueOf(result);
                 answerLineTextView.setText(calculations);
                 // push previous line into string to save into ArrayList of strings
+                ((MyApp)getApplication()).getPrevOperations().add(calculations);
+
+                if (advancedButtonEnabled) {
+                    //((MyApp)getApplication()).getPrevOperations().add(answerLine);
+                    listOfOperations = ((MyApp)getApplication()).getPrevOperations();
+                    index = ((MyApp)getApplication()).index;
+                    textViewHistory.append(calculations + "\n");
+                }
             }
         }
         else if (id == R.id.buttonClear) {
             clearAnswerLine();
         }
         else if (id == R.id.buttonAdvanced) {
-            advancedButtonEnabled = true;
+            if (advancedButtonEnabled) {
+                advancedButtonEnabled = false;
+                buttonAdvanced.setText(R.string.standard_no_history);
+                hideHistory();
+            }
+            else {
+                advancedButtonEnabled = true;
+                buttonAdvanced.setText(R.string.advanced);
+                showHistory();
+            }
         }
         else {
             // do nothing
@@ -316,19 +336,16 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 //    }
 //
     void clearAnswerLine() {
-        if (advancedButtonEnabled) {
-            ((MyApp)getApplication()).prevOperations.add(answerLine);
-            listOfOperations = ((MyApp)getApplication()).prevOperations;
-            textViewHistory.append(answerLine);
-            index = ((MyApp)getApplication()).index;
-        }
-
         answerLineTextView.setText("");
         answerLine = "";
         result = 0;
     }
-//
-//    void showHistory() {
-//
-//    }
+
+    void showHistory() {
+        textViewHistory.setVisibility(View.VISIBLE);
+    }
+
+    void hideHistory() {
+        textViewHistory.setVisibility(View.INVISIBLE);
+    }
 }

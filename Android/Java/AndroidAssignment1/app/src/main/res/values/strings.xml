@@ -23,6 +23,7 @@
     <string name="clear">C</string>
 
     <string name="advanced">ADVANCED - WITH HISTORY</string>
+
     <string name="alertMessageOneDigit">Only one digit operands allowed!</string>
     <string name="alertMessageOneOperator">Only one character operator is allowed!</string>
     <string name="alertMessageEqualSignInvalidPosition">You have entered \'=\' in an invalid position!</string>
@@ -33,4 +34,5 @@
     <string name="alertMessageNumberOrOperatorError">Number or Operator error!</string>
     <string name="alertMessageValidationFailedNumberOrOperatorError">Validation Failed! Number or Operator error!</string>
     <string name="alertMessageValidationFailedEnterNewValue">Validation failed! Please enter a new value</string>
+    <string name="standard_no_history">STANDARD - NO HISTORY</string>
 </resources>

@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 public class MyApp extends Application {
 
-//    String answerLine = "";
-//    char[] chars = answerLine.toCharArray();
-
     //ArrayList of strings for storing previous operations (for the advanced button)
     ArrayList<String> prevOperations;
     public int index = 0;
