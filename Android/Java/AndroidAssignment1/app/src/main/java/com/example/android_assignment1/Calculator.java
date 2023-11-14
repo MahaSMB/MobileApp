@@ -1,5 +1,6 @@
 package com.example.android_assignment1;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,14 +29,24 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     // Action buttons
     Button buttonEquals, buttonClear, buttonAdvanced;
+    boolean advancedButtonEnabled = false;
+    ArrayList<String> listOfOperations;
+    int index = 0;
 
     // TextView
-    TextView answerLineTextView;
+    TextView answerLineTextView, textViewHistory;
+    //Configuration newConfig2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.firstactivity);
+        //setContentView(R.layout.firstactivity);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.landscape_layout);
+        }
+        else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setContentView(R.layout.firstactivity);
+        }
 
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
@@ -60,6 +71,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         buttonAdvanced = findViewById(R.id.buttonAdvanced);
 
         answerLineTextView = findViewById(R.id.answerLineTextView);
+        textViewHistory = findViewById(R.id.textViewHistory);
 
         button0.setOnClickListener(this);
         button1.setOnClickListener(this);
@@ -138,14 +150,17 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
             }
             else {
                 result = calculate();
-                answerLineTextView.setText(answerLineTextView.getText().toString() + "=" + String.valueOf(result));
+
+                String calculations = answerLineTextView.getText().toString() + "=" + String.valueOf(result);
+                answerLineTextView.setText(calculations);
+                // push previous line into string to save into ArrayList of strings
             }
         }
         else if (id == R.id.buttonClear) {
             clearAnswerLine();
         }
         else if (id == R.id.buttonAdvanced) {
-            //
+            advancedButtonEnabled = true;
         }
         else {
             // do nothing
@@ -154,15 +169,16 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
     }
 
     /* TO DO
-    // Think about turning answer string into ArrayList
+    // Think about turning answer string into ArrayList (skip)
     // Have answer string/ArrayList in a MyApp class to have global data
-    // Make sure layout is good in landscape mode (make a new XML file)
-    // icon
+    // Make sure layout is good in landscape mode (make a new XML file) (done)
+    // icon (done)
 
      */
 
     void push (String text) {
         answerLine += text;
+        //MyApp application = (MyApp) getApplication();
         validate(answerLine);
     }
 
@@ -300,6 +316,13 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 //    }
 //
     void clearAnswerLine() {
+        if (advancedButtonEnabled) {
+            ((MyApp)getApplication()).prevOperations.add(answerLine);
+            listOfOperations = ((MyApp)getApplication()).prevOperations;
+            textViewHistory.append(answerLine);
+            index = ((MyApp)getApplication()).index;
+        }
+
         answerLineTextView.setText("");
         answerLine = "";
         result = 0;
