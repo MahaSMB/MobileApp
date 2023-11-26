@@ -14,4 +14,7 @@
     <string name="buy">BUY</string>
     <string name="c">C</string>
     <string name="error_onItemClickListViewStore">You have not clicked on an appropriate section of the store. Please try again!</string>
+    <string name="product_type">Product Type</string>
+    <string name="quantity">Quantity</string>
+    <string name="total_price">Total Price</string>
 </resources>
