@@ -5,19 +5,21 @@ import androidx.core.text.StringKt;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView textViewProductType, textViewTotalPrice, textViewQuantity;
-    ListView storeList;
+    ListView listViewStore;
 
     ArrayList<Product> currentStock;
 
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textViewTotalPrice = findViewById(R.id.textViewTotalPrice);
         textViewQuantity = findViewById(R.id.textViewQuantity);
 
-        storeList = findViewById(R.id.listView);
+        listViewStore = findViewById(R.id.listView);
 
         currentStock = ((MyApp)getApplication()).store;
 
@@ -41,10 +43,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ProductBaseAdapter productBaseAdapter = new ProductBaseAdapter(currentStock, this);
 
-        storeList.setAdapter(productBaseAdapter);
-        storeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewStore.setAdapter(productBaseAdapter);
+
+        // Populate the store
+        Product pants = new Product("pants", 10, 20.44);
+        Product shoes = new Product("shoes", 100, 10.44);
+        Product hats = new Product("hats", 30, 5.9);
+        currentStock.add(pants);
+        currentStock.add(shoes);
+        currentStock.add(hats);
+
+        listViewStore.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                id = (long) view.getId();
+                if (id == R.id.textViewProductName) {
+                    textViewProductType.setText(currentStock.get(position).getProductName());
+                }
+                else if (id == R.id.textViewProductPrice) {
+                    textViewTotalPrice.setText(String.valueOf(currentStock.get(position).getProductPrice()));
+                }
+                else if (id == R.id.textViewProductQty) {
+                    textViewQuantity.setText(String.valueOf(currentStock.get(position).getProductQty()));
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), R.string.error_onItemClickListViewStore, Toast.LENGTH_LONG).show();
+                    Log.d("ListViewStore_Error", "You have not clicked on an appropriate section of the store. Please try again!");
+                }
+
 
             }
         });
@@ -126,8 +152,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String stringTotalPrice = String.valueOf(totalPrice);
         textViewTotalPrice.setText(stringTotalPrice);
     }
-
-
 
 
 }

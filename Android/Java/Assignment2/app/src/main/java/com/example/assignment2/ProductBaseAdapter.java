@@ -10,27 +10,27 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ProductBaseAdapter extends BaseAdapter {
-    ArrayList<Product>  productArrayList;
+    ArrayList<Product> arrayListOfProducts;
     Context activityContext;
 
     ProductBaseAdapter(ArrayList<Product> list, Context context) {
-        productArrayList = list;
+        arrayListOfProducts = list;
         activityContext = context;
     }
 
     @Override
     public int getCount() {
-        return productArrayList.size();
+        return arrayListOfProducts.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return productArrayList.get(position);
+        return arrayListOfProducts.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -42,9 +42,9 @@ public class ProductBaseAdapter extends BaseAdapter {
         TextView productPrice = productRowView.findViewById(R.id.textViewProductPrice);
         TextView productQty = productRowView.findViewById(R.id.textViewProductQty);
 
-        productName.setText(productArrayList.get(position).getProductName());
-        productPrice.setText(String.valueOf(productArrayList.get(position).getProductPrice()));
-        productQty.setText(String.valueOf(productArrayList.get(position).getProductQty()));
+        productName.setText(arrayListOfProducts.get(position).getProductName());
+        productPrice.setText(String.valueOf(arrayListOfProducts.get(position).getProductPrice()));
+        productQty.setText(String.valueOf(arrayListOfProducts.get(position).getProductQty()));
 
         return productRowView;
     }
