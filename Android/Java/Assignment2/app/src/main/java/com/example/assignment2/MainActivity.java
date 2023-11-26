@@ -1,9 +1,7 @@
 package com.example.assignment2;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.text.StringKt;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +12,14 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView textViewProductType, textViewTotalPrice, textViewQuantity;
     ListView listViewStore;
+    int pantsInventory, shoesInventory, hatsInventory, quantityEntered;
 
     ArrayList<Product> currentStock;
 
@@ -38,6 +38,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listViewStore = findViewById(R.id.listView);
 
         currentStock = ((MyApp)getApplication()).store;
+
+        //noinspection StringEquality
+        if ( textViewQuantity.getText().toString() == "") {
+            quantityEntered = 0;
+        }
+        else {
+            quantityEntered = Integer.parseInt(textViewQuantity.getText().toString());
+        }
+
 
         //currentStock = (ArrayList<Product>) getIntent().getSerializableExtra("store");
 
@@ -68,11 +77,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    textViewQuantity.setText(String.valueOf(currentStock.get(position).getProductQty()));
 //                }
                 if (id == R.id.listView) {
+                    // setting the textView to show the product name in the listView for each product
                     textViewProductType.setText(currentStock.get(position).getProductName());
-                    textViewTotalPrice.setText("$");
-                    textViewTotalPrice.append(String.valueOf(currentStock.get(position).getProductPrice()));
 
-                    totalPrice(Integer.parseInt(textViewQuantity.getText().toString()), currentStock.get(position).getProductPrice());
+                    // setting the dollar sign for the total price to show up before the total price
+                    textViewTotalPrice.setText("$");
+
+                    // Formatting the product price
+                    DecimalFormat df = new DecimalFormat("0.00");
+
+                    // setting the textView to show the product price in the listView for each product
+                    textViewTotalPrice.append(df.format(currentStock.get(position).getProductPrice()));
+
+                    // calling the total price function to calculate the total price of the sale (total price = quantity * product price)
+                    //noinspection StringEquality
+                    if (textViewQuantity.getText().toString() == "") { // Safeguarding against NumberFormatException for input string ""
+                        totalPrice(0, currentStock.get(position).getProductPrice());
+                    } // https://stackoverflow.com/questions/8780962/proper-way-to-avoid-parseint-throwing-a-numberformatexception-for-input-string
+                    else {
+                        totalPrice(Integer.parseInt(textViewQuantity.getText().toString()), currentStock.get(position).getProductPrice());
+
+                    }
+
+                    // Retrieving the current amount of items per item for each product left in the store
+                    //noinspection StringEquality
+                    if (currentStock.get(position).getProductName() == "Pants") {
+                        pantsInventory = currentStock.get(position).getProductQty();
+
+                        // save in MyApp
+
+                        // if not enough quantity
+                        if (quantityEntered > pantsInventory ) {
+                            Toast.makeText(getApplicationContext(), R.string.error_onClickNotEnoughStock, Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                    else //noinspection StringEquality
+                        if (currentStock.get(position).getProductName() == "Shoes") {
+                        shoesInventory = currentStock.get(position).getProductQty();
+
+                        // save in MyApp
+
+                        // if not enough quantity
+                        if (quantityEntered > shoesInventory ) {
+                            Toast.makeText(getApplicationContext(), R.string.error_onClickNotEnoughStock, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else //noinspection StringEquality
+                            if (currentStock.get(position).getProductName() == "Hats") {
+                        hatsInventory = currentStock.get(position).getProductQty();
+
+                        // save in MyApp
+
+                        // if not enough quantity
+                        if (quantityEntered > hatsInventory ) {
+                            Toast.makeText(getApplicationContext(), R.string.error_onClickNotEnoughStock, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(), R.string.error_onItemClickListViewStore, Toast.LENGTH_LONG).show();
@@ -111,7 +173,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        clearQuantity();
+
+//        if (textViewQuantity.getText().toString() == "") {
+//            quantityEntered = 0;
+//        }
+//        quantityEntered = Integer.parseInt(textViewQuantity.getText().toString());
+
         if (id == R.id.button1) {
             textViewQuantity.append("1");
         }
@@ -148,6 +215,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (id == R.id.buttonBuy){
             // do nothing
         }
+
+
+
+
     }
 
     void clearQuantity() {
@@ -156,8 +227,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void totalPrice(int amount, double itemPrice) {
         double totalPrice = amount * itemPrice;
-        String stringTotalPrice = String.valueOf(totalPrice);
-        textViewTotalPrice.setText(stringTotalPrice);
+        DecimalFormat df = new DecimalFormat("0.00");
+        //String stringTotalPrice = String.valueOf(df.format(totalPrice));
+        textViewTotalPrice.setText(df.format(totalPrice));
     }
 
 
