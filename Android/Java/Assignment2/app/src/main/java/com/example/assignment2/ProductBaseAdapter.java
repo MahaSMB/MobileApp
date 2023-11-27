@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ProductBaseAdapter extends BaseAdapter {
@@ -43,7 +44,9 @@ public class ProductBaseAdapter extends BaseAdapter {
         TextView productQty = productRowView.findViewById(R.id.textViewProductQty);
 
         productName.setText(arrayListOfProducts.get(position).getProductName());
-        productPrice.setText(String.valueOf(arrayListOfProducts.get(position).getProductPrice()));
+        // Formatting the product price to two decimal points
+        DecimalFormat df = new DecimalFormat("0.00");
+        productPrice.setText(String.valueOf(df.format(arrayListOfProducts.get(position).getProductPrice())));
         productQty.setText(String.valueOf(arrayListOfProducts.get(position).getProductQty()));
 
         return productRowView;
