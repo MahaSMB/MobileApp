@@ -3,7 +3,6 @@ package com.example.assignment2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,21 +36,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         textViewProductType = findViewById(R.id.textViewProductType);
         textViewTotalPrice = findViewById(R.id.textViewTotalPrice);
         textViewQuantity = findViewById(R.id.textViewQuantity);
-
 
         listViewStore = findViewById(R.id.listView);
 
         currentStock = ((MyApp)getApplication()).store;
 
-        //noinspection StringEquality
-
         quantityEntered = Integer.parseInt(textViewQuantity.getText().toString());
-
-
 
         //currentStock = (ArrayList<Product>) getIntent().getSerializableExtra("store");
 
@@ -67,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         currentStock.add(pants);
         currentStock.add(shoes);
         currentStock.add(hats);
-
 
         listViewStore.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -210,7 +201,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int makePurchase(int purchasedAmount, int oldQuantity) {
         int newQuantity = oldQuantity - purchasedAmount;
 
-
         return newQuantity;
     }
 
@@ -229,8 +219,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvPopUp = popupView.findViewById(R.id.tvPopUp);
 
-        String thankYouForPurchase = "Thank you for your purchase!\n" + "Your purchase is for" +
-                quantityEntered + " " + selectedProductQty + " for " + " total cost.";
+        String thankYouForPurchase = "Thank you for your purchase!\r\n" + "\nYour purchase is for " +
+                quantityEntered + " " + textViewProductType.getText().toString() + " for $" +
+                textViewTotalPrice.getText().toString();
 
         tvPopUp.setText(thankYouForPurchase);
 
