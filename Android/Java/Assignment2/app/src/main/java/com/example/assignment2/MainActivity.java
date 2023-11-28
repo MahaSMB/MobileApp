@@ -3,6 +3,8 @@ package com.example.assignment2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -97,7 +99,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         selectedProductQty = currentStock.get(position).getProductQty();
                         int myAppSelectedProductQty = ((MyApp)getApplication()).store.get(position).getProductQty();
 
+
                         // After purchase
+//                        currentStock.get(position).setProductQty(((MyApp)getApplication()).newProductQty);
+
                     }
                 }
                 else {
@@ -174,12 +179,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (id == R.id.buttonBuy) {
             if (quantityEntered != 0 && textViewProductType.getText().toString() != "") {
                 newProductQty = makePurchase(quantityEntered, selectedProductQty);
+                // save newProductQty to MyApp and retrieve it to update
+                ((MyApp)getApplication()).newProductQty = newProductQty;
 
                 onButtonShowPopupWindowClick(view);
 
-                /*
-                https://stackoverflow.com/questions/5944987/how-to-create-a-popup-window-popupwindow-in-android
-                 */
+                // update product quantity
+                currentStock.get(((MyApp)getApplication()).positionOfProduct).setProductQty(((MyApp)getApplication()).newProductQty);
+
+                // restart activity so that new product quantities are updated
+                restartActivity(this);
             }
             else {
                 Toast.makeText(getApplicationContext(), R.string.error_missingQtyProduct, Toast.LENGTH_LONG).show();
@@ -228,9 +237,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window token
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { // adding a shadow
-            popupWindow.setElevation(20);
-        }
+        // adding a shadow
+        popupWindow.setElevation(20);
+
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
@@ -242,6 +251,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+
+        /*
+                https://stackoverflow.com/questions/5944987/how-to-create-a-popup-window-popupwindow-in-android
+         */
+    }
+
+    public static void restartActivity(Activity activity) {
+
+
+        Intent i = activity.getIntent();
+        activity.finish();
+        activity.startActivity(i);
+
+        /*
+        https://stackoverflow.com/questions/1397361/how-to-restart-activity-in-android
+        */
     }
 
 

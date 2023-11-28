@@ -12,6 +12,10 @@ public class Product {
         this.productPrice = productPrice;
     }
 
+    public void setProductQty(int productQty) {
+        this.productQty = productQty;
+    }
+
     public String getProductName() {
         return productName;
     }
