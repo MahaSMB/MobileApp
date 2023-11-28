@@ -69,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 quantityEntered = Integer.parseInt(textViewQuantity.getText().toString());
 
                 if (id == R.id.listView) {
+
+                    // Save selected Product in MyApp before purchase
+                    ((MyApp)getApplication()).positionOfProduct = (int) productBaseAdapter.getItemId(position);
                     // setting the textView to show the product name in the listView for each product
                     textViewProductType.setText(currentStock.get(position).getProductName());
 
@@ -181,6 +184,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 newProductQty = makePurchase(quantityEntered, selectedProductQty);
                 // save newProductQty to MyApp and retrieve it to update
                 ((MyApp)getApplication()).newProductQty = newProductQty;
+
+                /*
+                FIX BUGS!!
+                 */
 
                 onButtonShowPopupWindowClick(view);
 

@@ -21,16 +21,19 @@ public class ProductBaseAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+
         return arrayListOfProducts.size();
     }
 
     @Override
     public Object getItem(int position) {
+
         return arrayListOfProducts.get(position);
     }
 
     @Override
     public long getItemId(int position) {
+
         return position;
     }
 
@@ -46,7 +49,7 @@ public class ProductBaseAdapter extends BaseAdapter {
         productName.setText(arrayListOfProducts.get(position).getProductName());
         // Formatting the product price to two decimal points
         DecimalFormat df = new DecimalFormat("0.00");
-        productPrice.setText(String.valueOf(df.format(arrayListOfProducts.get(position).getProductPrice())));
+        productPrice.setText(df.format(arrayListOfProducts.get(position).getProductPrice()));
         productQty.setText(String.valueOf(arrayListOfProducts.get(position).getProductQty()));
 
         return productRowView;
