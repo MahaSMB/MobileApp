@@ -1,13 +1,20 @@
 package com.example.assignment2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,9 +24,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextView textViewProductType, textViewTotalPrice, textViewQuantity;
+    TextView textViewProductType, textViewTotalPrice, textViewQuantity, tvPopUp;
     ListView listViewStore;
-    int pantsInventory, shoesInventory, hatsInventory, quantityEntered;
+    int pantsInventory, shoesInventory, hatsInventory, quantityEntered, selectedProductQty, newProductQty;
 
     ArrayList<Product> currentStock;
 
@@ -31,9 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         textViewProductType = findViewById(R.id.textViewProductType);
         textViewTotalPrice = findViewById(R.id.textViewTotalPrice);
         textViewQuantity = findViewById(R.id.textViewQuantity);
+
 
         listViewStore = findViewById(R.id.listView);
 
@@ -94,7 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(getApplicationContext(), R.string.error_onClickNotEnoughStock, Toast.LENGTH_LONG).show();
                     }
                     else {
-                        // call buy
+                        selectedProductQty = currentStock.get(position).getProductQty();
+                        int myAppSelectedProductQty = ((MyApp)getApplication()).store.get(position).getProductQty();
+
+                        // After purchase
                     }
                 }
                 else {
@@ -169,7 +181,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             clearQuantity();
         }
         else if (id == R.id.buttonBuy) {
-            // do nothing
+            if (quantityEntered != 0 && textViewProductType.getText().toString() != "") {
+                newProductQty = makePurchase(quantityEntered, selectedProductQty);
+
+                onButtonShowPopupWindowClick(view);
+
+                /*
+                https://stackoverflow.com/questions/5944987/how-to-create-a-popup-window-popupwindow-in-android
+                 */
+            }
+            else {
+                Toast.makeText(getApplicationContext(), R.string.error_missingQtyProduct, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -182,6 +205,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DecimalFormat df = new DecimalFormat("0.00");
         //String stringTotalPrice = String.valueOf(df.format(totalPrice));
         textViewTotalPrice.setText(df.format(totalPrice));
+    }
+
+    int makePurchase(int purchasedAmount, int oldQuantity) {
+        int newQuantity = oldQuantity - purchasedAmount;
+
+
+        return newQuantity;
+    }
+
+    public void onButtonShowPopupWindowClick(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window, null);
+
+        // create the popup window
+        int width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+        int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        tvPopUp = popupView.findViewById(R.id.tvPopUp);
+
+        String thankYouForPurchase = "Thank you for your purchase!\n" + "Your purchase is for" +
+                quantityEntered + " " + selectedProductQty + " for " + " total cost.";
+
+        tvPopUp.setText(thankYouForPurchase);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window token
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { // adding a shadow
+            popupWindow.setElevation(20);
+        }
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
     }
 
 
