@@ -5,7 +5,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView textViewProductType, textViewTotalPrice, textViewQuantity, tvPopUp;
     ListView listViewStore;
-    int pantsInventory, shoesInventory, hatsInventory, quantityEntered, selectedProductQty, newProductQty;
+    int quantityEntered, selectedProductQty, newProductQty;
 
     ArrayList<Product> currentStock;
 
@@ -50,9 +49,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //currentStock = (ArrayList<Product>) getIntent().getSerializableExtra("store");
 
+        ((MyApp)getApplication()).mainActivityContext = MainActivity.this;
+
         ProductBaseAdapter productBaseAdapter = new ProductBaseAdapter(currentStock, this);
+        ((MyApp)getApplication()).productBaseAdapter = productBaseAdapter;
 
         listViewStore.setAdapter(productBaseAdapter);
+        ((MyApp)getApplication()).listViewStore = listViewStore;
 
         // Populate the store
         Product pants = new Product("Pants", 10, 20.44);
@@ -70,16 +73,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (id == R.id.listView) {
 
-                    // Save selected Product in MyApp before purchase
+                    // Save selected Product position in MyApp before purchase
                     ((MyApp)getApplication()).positionOfProduct = (int) productBaseAdapter.getItemId(position);
+
                     // setting the textView to show the product name in the listView for each product
                     textViewProductType.setText(currentStock.get(position).getProductName());
 
                     // setting the dollar sign for the total price to show up before the total price
                     textViewTotalPrice.setText("$");
-
-                    // Formatting the product price
-                    DecimalFormat df = new DecimalFormat("0.00");
 
                     // setting the textView to show the product price in the listView for each product
                     textViewTotalPrice.append(String.valueOf(currentStock.get(position).getProductPrice()));
@@ -100,8 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     else {
                         selectedProductQty = currentStock.get(position).getProductQty();
-                        int myAppSelectedProductQty = ((MyApp)getApplication()).store.get(position).getProductQty();
-
 
                         // After purchase
 //                        currentStock.get(position).setProductQty(((MyApp)getApplication()).newProductQty);
@@ -185,6 +184,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // save newProductQty to MyApp and retrieve it to update
                 ((MyApp)getApplication()).newProductQty = newProductQty;
 
+                //((MyApp)getApplication()).productBaseAdapter.clearArrayListOfProducts();
+
                 /*
                 FIX BUGS!!
                  */
@@ -264,11 +265,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          */
     }
 
-    public static void restartActivity(Activity activity) {
-
-
+    public void restartActivity(Activity activity) {
         Intent i = activity.getIntent();
         activity.finish();
+
+        // Clearing arrayListOfProducts so that the listview does not create new rows when
+        // the activity restarts
+        ((MyApp)getApplication()).productBaseAdapter.clearArrayListOfProducts();
+
+
         activity.startActivity(i);
 
         /*

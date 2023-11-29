@@ -12,11 +12,16 @@ import java.util.ArrayList;
 
 public class ProductBaseAdapter extends BaseAdapter {
     ArrayList<Product> arrayListOfProducts;
+
     Context activityContext;
 
     ProductBaseAdapter(ArrayList<Product> list, Context context) {
         arrayListOfProducts = list;
         activityContext = context;
+    }
+
+    public void clearArrayListOfProducts() {
+        arrayListOfProducts.clear();
     }
 
     @Override
@@ -39,6 +44,7 @@ public class ProductBaseAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View productRowView =  LayoutInflater.from(activityContext).inflate(R.layout.product_list_row,
                 parent, false);
 
