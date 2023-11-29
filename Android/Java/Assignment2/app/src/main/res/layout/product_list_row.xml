@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,19 +11,19 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:paddingHorizontal="0dp"
-        android:text="product type"
+        android:hint="@string/product_type_product_list_row"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@id/textViewProductPrice"
         app:layout_constraintEnd_toStartOf="@id/textViewProductQty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-         />
+        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/textViewProductQty"
         android:layout_width="94dp"
         android:layout_height="match_parent"
-        android:text="10"
+        android:hint="@string/product_qty_product_list_row"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/textViewProductPrice"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,12 +35,13 @@
         android:id="@+id/textViewProductPrice"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="$9.99"
+        android:hint="@string/product_price_product_list_row"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewProductName" />
+        app:layout_constraintTop_toBottomOf="@id/textViewProductName"
+        tools:ignore="TextSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

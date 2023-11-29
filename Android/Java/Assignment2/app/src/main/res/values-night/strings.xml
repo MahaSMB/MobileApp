@@ -27,5 +27,8 @@
     <string name="product_type_rv">product type</string>
     <string name="product_price_rv">$9.99</string>
     <string name="product_qty_rv">10</string>
+    <string name="product_type_product_list_row">product type</string>
+    <string name="product_price_product_list_row">$9.99</string>
+    <string name="product_qty_product_list_row">10</string>
 
 </resources>

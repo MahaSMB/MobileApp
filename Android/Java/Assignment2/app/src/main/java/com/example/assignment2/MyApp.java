@@ -2,14 +2,14 @@ package com.example.assignment2;
 
 import android.app.Application;
 import android.content.Context;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class MyApp extends Application {
     ArrayList<Product> store = new ArrayList<>();
 
-    ArrayList<History> historyList;
+    ArrayList<History> historyList = new ArrayList<>();
+    Double totalPrice;
 
     Context mainActivityContext;
 //    ListView listViewStore;

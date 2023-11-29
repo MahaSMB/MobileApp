@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -63,19 +64,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listViewStore.setAdapter(productBaseAdapter);
 //        ((MyApp)getApplication()).listViewStore = listViewStore;
 
-        toManagerActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult activity) {
-                        if (activity.getResultCode() == RESULT_OK)  {
-                            activity.getData().getSerializableExtra("purchaseHistory");
-
-                            // need to do adapter stuff here
-                        }
-                    }
-                }
-        );
+//        toManagerActivityResultLauncher = registerForActivityResult(
+//                new ActivityResultContracts.StartActivityForResult(),
+//                new ActivityResultCallback<ActivityResult>() {
+//                    @Override
+//                    public void onActivityResult(ActivityResult activity) {
+//                        if (activity.getResultCode() == RESULT_OK)  {
+//                            History history = (History) activity.getData().getSerializableExtra("purchaseHistory");
+//
+//                            // need to do adapter stuff here
+//                            //productBaseAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                }
+//        );
 
         // Populate the store
         Product pants = new Product("Pants", 10, 20.44);
@@ -110,9 +112,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (textViewQuantity.getText().toString() == "") {
                         // Safeguarding against NumberFormatException for input string ""
                         totalPrice(0, currentStock.get(position).getProductPrice());
+
                     } // https://stackoverflow.com/questions/8780962/proper-way-to-avoid-parseint-throwing-a-numberformatexception-for-input-string
                     else {
-                        totalPrice(Integer.parseInt(textViewQuantity.getText().toString()), currentStock.get(position).getProductPrice());
+                         totalPrice(Integer.parseInt(textViewQuantity.getText().toString()), currentStock.get(position).getProductPrice());
+
                     }
 
                     // Retrieving the current amount of items per item for each product left in the store
@@ -124,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         // After purchase
 //                        currentStock.get(position).setProductQty(((MyApp)getApplication()).newProductQty);
-
                     }
                 }
                 else {
@@ -207,10 +210,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // save newProductQty to MyApp and retrieve it to update
                 ((MyApp)getApplication()).newProductQty = newProductQty;
 
+
+
                 onButtonShowPopupWindowClick(view);
 
                 // update product quantity
                 currentStock.get(((MyApp)getApplication()).positionOfProduct).setProductQty(((MyApp)getApplication()).newProductQty);
+
+                // Set purchase Date and create purchase history object
+                String purchasedProductName = currentStock.get(((MyApp)getApplication()).positionOfProduct).getProductName();
+                Double purchasedTotal = ((MyApp)getApplication()).totalPrice;
+                Date purchaseDate = new Date();
+                History productHistory = new History( purchasedProductName, newProductQty,
+                        purchasedTotal, purchaseDate);
+
+                ((MyApp)getApplication()).historyList.add(productHistory);
 
             }
             else {
@@ -234,6 +248,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DecimalFormat df = new DecimalFormat("0.00");
         //String stringTotalPrice = String.valueOf(df.format(totalPrice));
         textViewTotalPrice.setText(df.format(totalPrice));
+
+        ((MyApp)getApplication()).totalPrice = totalPrice;
     }
 
     int makePurchase(int purchasedAmount, int oldQuantity) {

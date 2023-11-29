@@ -21,7 +21,7 @@
             android:value=".Manager" />
         </activity>
         <activity
-            android:name=".HistoryList"
+            android:name=".RecyclerViewHistoryActivity"
             android:exported="true"
             android:label="@string/title_activity_history"
             android:theme="@style/Theme.Assignment2" >

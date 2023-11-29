@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Manager extends AppCompatActivity implements View.OnClickListener{
 
     Button buttonHistory;
-    ArrayList<Product> currentStock;
+    ArrayList<History> historyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,18 +22,19 @@ public class Manager extends AppCompatActivity implements View.OnClickListener{
         buttonHistory = findViewById(R.id.buttonHistory);
 
         buttonHistory.setOnClickListener(this);
-        currentStock =  (ArrayList<Product>) getIntent().getSerializableExtra("purchaseHistory");
+        historyList =  (ArrayList<History>) getIntent().getSerializableExtra("purchaseHistory");
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
 
+        // Button to History List (Recycler View)
         if (id == R.id.buttonHistory) {
-            Intent toHistoryIntent = new Intent(Manager.this, HistoryList.class);
-            currentStock = ((MyApp)getApplication()).store;
-            toHistoryIntent.putExtra("purchaseHistory", currentStock);
-            startActivity(toHistoryIntent);
+            Intent toHistoryListIntent = new Intent(Manager.this, RecyclerViewHistoryActivity.class);
+//            historyList = ((MyApp)getApplication()).historyList;
+//            toHistoryIntent.putExtra("purchaseHistory", historyList);
+            startActivity(toHistoryListIntent);
         }
 
     }
