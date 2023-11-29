@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 public class MyApp extends Application {
     ArrayList<Product> store = new ArrayList<>();
+
+    ArrayList<History> historyList;
+
     Context mainActivityContext;
 //    ListView listViewStore;
 //    ProductBaseAdapter productBaseAdapter = new ProductBaseAdapter(store, mainActivityContext);

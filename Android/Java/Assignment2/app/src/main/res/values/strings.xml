@@ -21,6 +21,8 @@
     <string name="manager">MANAGER</string>
     <string name="productQuantity_0">0</string>
     <string name="title_activity_history">History</string>
+    <string name="title_activity_manager">Manager</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -64,4 +66,8 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="history">History</string>
+    <string name="date">Date</string>
+    <string name="product_type_rv">product type</string>
+    <string name="product_price_rv">$9.99</string>
+    <string name="product_qty_rv">10</string>
 </resources>

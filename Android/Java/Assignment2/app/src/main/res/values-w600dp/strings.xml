@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="history">History</string>
+    <string name="title_activity_manager">Manager</string>
+    <string name="date">Date</string>
+    <string name="product_type_rv">product type</string>
+    <string name="product_price_rv">$9.99</string>
+    <string name="product_qty_rv">10</string>
+
 </resources>
