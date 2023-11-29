@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
         android:autofillHints="Product Type"
-        android:text="Product Type"
+        android:hint="@string/product_type"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewTotalPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,15 +22,15 @@
 
     <TextView
         android:id="@+id/textViewTotalPrice"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="Total Price"
-        android:text="Total Price"
-        android:textAlignment="center"
+        android:hint="@string/total_price"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/guideline1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guidelineVertical2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/guidelineVertical1"
         app:layout_constraintTop_toBottomOf="@+id/textViewProductType" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -41,10 +42,10 @@
 
     <TableLayout
         android:id="@+id/tableLayout"
-        android:layout_width="264dp"
-        android:layout_height="201dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/buttonBuy"
-        app:layout_constraintEnd_toEndOf="@id/guidelineVertical"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVertical1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewTotalPrice">
@@ -156,49 +157,68 @@
         android:text="@string/buy"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guidelineVertical"
+        app:layout_constraintEnd_toStartOf="@id/guidelineVertical1"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-        app:layout_constraintVertical_bias="0.0" />
+         />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.53" />
+        app:layout_constraintGuide_percent="0.27" />
 
     <TextView
         android:id="@+id/textViewQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="264dp"
-        android:layout_marginEnd="6dp"
-        android:text="Quantity"
+        android:text="@string/productQuantity_0"
+        android:textSize="20sp"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/listView"
-        app:layout_constraintStart_toStartOf="@+id/tableLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalPrice"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/guidelineVertical1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVertical2"
+        app:layout_constraintTop_toBottomOf="@+id/guideline1"
+        app:layout_constraintVertical_bias="0.1"
+         />
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="410dp"
-        android:layout_height="331dp"
+        android:layout_width="327dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/guidelineVertical"
-        app:layout_constraintTop_toBottomOf="@id/textViewQuantity"
+        app:layout_constraintStart_toEndOf="@id/guidelineVertical2"
+        app:layout_constraintTop_toBottomOf="@id/guideline2"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineVertical"
+        android:id="@+id/guidelineVertical1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.38030097" />
+
+    <Button
+        android:id="@+id/buttonManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/manager"
+        app:layout_constraintStart_toEndOf="@id/guidelineVertical1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineVertical2"
+        app:layout_constraintTop_toBottomOf="@id/guideline2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.54" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

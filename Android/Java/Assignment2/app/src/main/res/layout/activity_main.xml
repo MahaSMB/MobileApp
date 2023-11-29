@@ -172,26 +172,37 @@
 
     <TextView
         android:id="@+id/textViewQuantity"
-        android:layout_width="match_parent"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="30sp"
+        android:text="@string/productQuantity_0"
         android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/listView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/listView"
+        app:layout_constraintStart_toEndOf="@id/buttonManager"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="409dp"
-        android:layout_height="322dp"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
         android:paddingTop="60dp"
         android:paddingBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewQuantity"/>
+
+    <Button
+        android:id="@+id/buttonManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/manager"
+        app:layout_constraintBottom_toTopOf="@id/listView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textViewQuantity"
+        app:layout_constraintTop_toBottomOf="@id/guideline2"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

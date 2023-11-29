@@ -1,5 +1,9 @@
 package com.example.assignment2;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -30,7 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<Product> currentStock;
 
     Button button1, button2, button3, button4, button5, button6, button7, button8, button9,
-            button0, buttonClear, buttonBuy;
+            button0, buttonClear, buttonBuy, buttonManager;
+
+    ActivityResultLauncher<Intent> toManagerActivityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +58,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ((MyApp)getApplication()).mainActivityContext = MainActivity.this;
 
         ProductBaseAdapter productBaseAdapter = new ProductBaseAdapter(currentStock, this);
-        ((MyApp)getApplication()).productBaseAdapter = productBaseAdapter;
+//        ((MyApp)getApplication()).productBaseAdapter = productBaseAdapter;
 
         listViewStore.setAdapter(productBaseAdapter);
-        ((MyApp)getApplication()).listViewStore = listViewStore;
+//        ((MyApp)getApplication()).listViewStore = listViewStore;
+
+        toManagerActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult activity) {
+                        if (activity.getResultCode() == RESULT_OK)  {
+                            activity.getData().getSerializableExtra("purchaseHistory");
+
+                            // need to do adapter stuff here
+                        }
+                    }
+                }
+        );
 
         // Populate the store
         Product pants = new Product("Pants", 10, 20.44);
@@ -126,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9 = findViewById(R.id.button9);
         buttonClear = findViewById(R.id.buttonClear);
         buttonBuy = findViewById(R.id.buttonBuy);
+        buttonManager = findViewById(R.id.buttonManager);
 
         button0.setOnClickListener(this);
         button1.setOnClickListener(this);
@@ -139,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9.setOnClickListener(this);
         buttonClear.setOnClickListener(this);
         buttonBuy.setOnClickListener(this);
+        buttonManager.setOnClickListener(this);
     }
 
     @Override
@@ -181,26 +203,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (id == R.id.buttonBuy) {
             if (quantityEntered != 0 && textViewProductType.getText().toString() != "") {
                 newProductQty = makePurchase(quantityEntered, selectedProductQty);
+
                 // save newProductQty to MyApp and retrieve it to update
                 ((MyApp)getApplication()).newProductQty = newProductQty;
-
-                //((MyApp)getApplication()).productBaseAdapter.clearArrayListOfProducts();
-
-                /*
-                FIX BUGS!!
-                 */
 
                 onButtonShowPopupWindowClick(view);
 
                 // update product quantity
                 currentStock.get(((MyApp)getApplication()).positionOfProduct).setProductQty(((MyApp)getApplication()).newProductQty);
 
-                // restart activity so that new product quantities are updated
-                restartActivity(this);
             }
             else {
                 Toast.makeText(getApplicationContext(), R.string.error_missingQtyProduct, Toast.LENGTH_LONG).show();
             }
+        }
+        else if (id == R.id.buttonManager) {
+            Intent toManagerIntent = new Intent(MainActivity.this, Manager.class);
+            toManagerIntent.putExtra("purchaseHistory", currentStock);
+            startActivity(toManagerIntent);
+
         }
     }
 
@@ -216,9 +237,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     int makePurchase(int purchasedAmount, int oldQuantity) {
-        int newQuantity = oldQuantity - purchasedAmount;
+//        int newQuantity = oldQuantity - purchasedAmount;
 
-        return newQuantity;
+        return oldQuantity - purchasedAmount;
     }
 
     public void onButtonShowPopupWindowClick(View view) {
@@ -256,6 +277,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 popupWindow.dismiss();
+
+                // restart activity so that new product quantities are updated after purchase
+                restartActivity(MainActivity.this);
+
                 return true;
             }
         });
@@ -271,8 +296,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Clearing arrayListOfProducts so that the listview does not create new rows when
         // the activity restarts
-        ((MyApp)getApplication()).productBaseAdapter.clearArrayListOfProducts();
-
+        //((MyApp)getApplication()).productBaseAdapter.clearArrayListOfProducts();
 
         activity.startActivity(i);
 

@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/MediumSpringGreen</item>
         <item name="colorOnPrimary">@color/black</item>
         <item name="dialogTheme">@color/Aqua</item>
-       <!-- <item name="colorButtonNormal">@color/navy</item>-->
+        <!-- <item name="colorButtonNormal">@color/navy</item>-->
     </style>
     <!--<style name="Widget.App.Button" parent="Widget.Material3.Button">
         <item name="materialThemeOverlay">@style/ThemeOverlay.Material3.DynamicColors.Dark</item>

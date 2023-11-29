@@ -1,6 +1,8 @@
 package com.example.assignment2;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
     String productName;
     int productQty;
