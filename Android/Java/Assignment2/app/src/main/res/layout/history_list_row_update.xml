@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/tvRvProductNameUpdate"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="2dp"
+        android:hint="@string/product_type_rv"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/tvRvProductPriceUpdate"
+        app:layout_constraintEnd_toStartOf="@id/tvRvProductQtyUpdate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRvProductQtyUpdate"
+        android:layout_width="94dp"
+        android:layout_height="match_parent"
+        android:hint="@string/product_qty_rv"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/tvRvProductPriceUpdate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@id/tvRvProductNameUpdate"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRvProductPriceUpdate"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:hint="@string/product_price_rv"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvRvProductDateUpdate"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRvProductNameUpdate" />
+
+    <TextView
+        android:id="@+id/tvRvProductDateUpdate"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:hint="@string/date"
+        android:textAlignment="textEnd"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvRvProductPriceUpdate"
+        app:layout_constraintTop_toBottomOf="@id/tvRvProductNameUpdate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

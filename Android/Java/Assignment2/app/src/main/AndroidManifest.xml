@@ -18,13 +18,13 @@
             android:exported="true"
             android:label="@string/title_activity_manager" >
         <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".Manager" />
+            android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".RecyclerViewHistoryActivity"
             android:exported="true"
-            android:label="@string/title_activity_history"
-            android:theme="@style/Theme.Assignment2" >
+            android:label="Purchase History"
+            >
         <meta-data android:name="android.support.PARENT_ACTIVITY"
             android:value=".Manager" />
         </activity>
