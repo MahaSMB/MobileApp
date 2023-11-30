@@ -33,7 +33,7 @@ public class RecyclerViewHistoryActivity extends AppCompatActivity
 
     @Override
     public void onHistoryClicked(int i) {
-        Intent toHistoryDetailsIntent = new Intent(this, Manager.class);
+        Intent toHistoryDetailsIntent = new Intent(this, HistoryDetails.class);
 
 //        historyList = ((MyApp)getApplication()).historyList;
 

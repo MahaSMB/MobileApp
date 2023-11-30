@@ -9,5 +9,13 @@
     <string name="product_type_product_list_row">product type</string>
     <string name="product_price_product_list_row">$9.99</string>
     <string name="product_qty_product_list_row">10</string>
+    <string name="price_history_detail">Price:</string>
+    <string name="price_amount_history_detail">$40.00</string>
+    <string name="product_label_history_detail">Product:</string>
+    <string name="history_detail_product_name">Pants</string>
+    <string name="history_detail_date">Wed Nov 22 2023</string>
+    <string name="history_detail_label">Purchase Date:</string>
+    <string name="history_detail_quantity_label">Quantity:</string>
+    <string name="history_detail_quantity_amount">10</string>
 
 </resources>

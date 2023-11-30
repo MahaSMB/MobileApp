@@ -57,7 +57,7 @@ public class HistoryRecyclerAdapter extends
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onHistoryClicked(holder.getAdapterPosition()); // step 5
+                listener.onHistoryClicked(holder.getAdapterPosition());
             }
         });
     }

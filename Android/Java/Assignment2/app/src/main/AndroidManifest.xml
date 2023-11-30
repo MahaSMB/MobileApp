@@ -14,19 +14,28 @@
         android:theme="@style/Theme.Assignment2"
         tools:targetApi="31">
         <activity
+            android:name=".HistoryDetails"
+            android:exported="true"
+            android:label="History Details"
+            android:theme="@style/Theme.Assignment2" />
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".RecyclerViewHistoryActivity" />
+        <activity
             android:name=".Manager"
             android:exported="true"
-            android:label="@string/title_activity_manager" >
-        <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
+            android:label="@string/title_activity_manager">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".RecyclerViewHistoryActivity"
             android:exported="true"
-            android:label="Purchase History"
-            >
-        <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".Manager" />
+            android:label="Purchase History">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Manager" />
         </activity>
         <activity
             android:name=".MainActivity"
