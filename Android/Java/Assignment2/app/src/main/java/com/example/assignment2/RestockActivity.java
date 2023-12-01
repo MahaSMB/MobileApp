@@ -2,6 +2,8 @@ package com.example.assignment2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +19,6 @@ import java.util.ArrayList;
 public class RestockActivity extends AppCompatActivity implements View.OnClickListener{
 
     ArrayList<History>  historyList;
-    ArrayList<Product>  productList = new ArrayList<>();
 
     ArrayList<Product> restockStore = new ArrayList<>();
 
@@ -49,28 +50,12 @@ public class RestockActivity extends AppCompatActivity implements View.OnClickLi
 
         restockStore = ((MyApp)getApplication()).store;
 
-
-
         ProductBaseAdapter productBaseAdapter = new ProductBaseAdapter(restockStore, this);
 
 
         listviewRestock.setAdapter(productBaseAdapter);
 
-        // inventory array indices: Pants = 0, Shoes = 1, Hats = 2
-
-        // Populate the listView
-//        Product pants = new Product(((MyApp)getApplication()).store.get(0).getProductName(), ((MyApp)getApplication()).inventory[0],
-//                ((MyApp)getApplication()).store.get(0).getProductPrice());
-//        Product shoes = new Product(((MyApp)getApplication()).store.get(1).getProductName(), ((MyApp)getApplication()).inventory[1],
-//                ((MyApp)getApplication()).store.get(1).getProductPrice());
-//        Product hats = new Product(((MyApp)getApplication()).store.get(2).getProductName(), ((MyApp)getApplication()).inventory[2],
-//                ((MyApp)getApplication()).store.get(2).getProductPrice());
-//        productList.add(pants);
-//        productList.add(shoes);
-//        productList.add(hats);
-
         restockStore = ((MyApp)getApplication()).store;
-
 
         listviewRestock.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,6 +66,9 @@ public class RestockActivity extends AppCompatActivity implements View.OnClickLi
                     // setting the textView to show the product name in the textViewRestock for the
                     // product inventory to be increased
                     textViewRestock.setText(restockStore.get(position).getProductName());
+
+                    // Saving the position to be used later in the Okay button to restock
+                    ((MyApp)getApplication()).positionOfProduct = position;
                 }
             }
         });
@@ -95,15 +83,36 @@ public class RestockActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(getApplicationContext(), R.string.error_missingProductAndNewQty, Toast.LENGTH_LONG).show();
             }
             else {
-                int newQuantity = Integer.parseInt(editTextRestock.getText().toString());
+
+                // Restocking selected product
+                int quantityToAdd = Integer.parseInt(editTextRestock.getText().toString());
+                int position = ((MyApp)getApplication()).positionOfProduct;
+                int oldQuantity = restockStore.get(position).getProductQty();
+                int newQuantity = quantityToAdd + oldQuantity;
+
+                restockStore.get(position).setProductQty(newQuantity);
+                restartActivity(this);
 
             }
         }
         else if (id == R.id.buttonCancel) {
-
+            // Return back to the Manager screen
+            Intent toManagerIntent = new Intent(this, Manager.class);
+            startActivity(toManagerIntent);
         }
-        else if (id == R.id.editTextRestock) {
+//        else if (id == R.id.editTextRestock) {
+//
+//        }
+    }
 
-        }
+    public void restartActivity(Activity activity) {
+        Intent i = activity.getIntent();
+        activity.finish();
+
+        activity.startActivity(i);
+
+        /*
+        https://stackoverflow.com/questions/1397361/how-to-restart-activity-in-android
+        */
     }
 }
