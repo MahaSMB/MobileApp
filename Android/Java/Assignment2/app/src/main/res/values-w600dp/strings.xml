@@ -17,5 +17,9 @@
     <string name="history_detail_label">Purchase Date:</string>
     <string name="history_detail_quantity_label">Quantity:</string>
     <string name="history_detail_quantity_amount">10</string>
+    <string name="restock_button_cancel">Cancel</string>
+    <string name="restock_button_okay">Okay</string>
+    <string name="restock_edittext_enter_new_quantity">Enter new quantity</string>
+    <string name="error_missingProductAndNewQty">Please make sure you have selected a Product Type and have entered a new quantity!</string>
 
 </resources>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,11 +32,12 @@ public class HistoryDetails extends AppCompatActivity {
         String productName = historyList.get(currentProduct).getProductName();
         int productQty = historyList.get(currentProduct).getProductQty();
         double productPrice = historyList.get(currentProduct).getProductPrice();
+        DecimalFormat df = new DecimalFormat("0.00");
         Date productPurchaseDate = historyList.get(currentProduct).getPurchaseDate();
 
         tvHdProductName.setText(productName);
         tvHdQuantityQty.setText(String.valueOf(productQty));
-        tvHdPricePrice.setText(String.valueOf(productPrice));
+        tvHdPricePrice.setText(String.valueOf(df.format(productPrice)));
         tvHdPurchaseDateDate.setText(String.valueOf(productPurchaseDate));
 
 

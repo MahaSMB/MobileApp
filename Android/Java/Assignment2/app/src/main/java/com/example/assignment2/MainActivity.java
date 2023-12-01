@@ -1,9 +1,6 @@
 package com.example.assignment2;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -32,12 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView listViewStore;
     int quantityEntered, selectedProductQty, newProductQty;
 
-    ArrayList<Product> currentStock;
+    ArrayList<Product> currentStock = new ArrayList<>();
 
     Button button1, button2, button3, button4, button5, button6, button7, button8, button9,
             button0, buttonClear, buttonBuy, buttonManager;
-
-    ActivityResultLauncher<Intent> toManagerActivityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,22 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        ((MyApp)getApplication()).productBaseAdapter = productBaseAdapter;
 
         listViewStore.setAdapter(productBaseAdapter);
-//        ((MyApp)getApplication()).listViewStore = listViewStore;
 
-//        toManagerActivityResultLauncher = registerForActivityResult(
-//                new ActivityResultContracts.StartActivityForResult(),
-//                new ActivityResultCallback<ActivityResult>() {
-//                    @Override
-//                    public void onActivityResult(ActivityResult activity) {
-//                        if (activity.getResultCode() == RESULT_OK)  {
-//                            History history = (History) activity.getData().getSerializableExtra("purchaseHistory");
-//
-//                            // need to do adapter stuff here
-//                            //productBaseAdapter.notifyDataSetChanged();
-//                        }
-//                    }
-//                }
-//        );
 
         // Populate the store
         Product pants = new Product("Pants", 10, 20.44);
@@ -125,9 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     else {
                         selectedProductQty = currentStock.get(position).getProductQty();
-
-                        // After purchase
-//                        currentStock.get(position).setProductQty(((MyApp)getApplication()).newProductQty);
                     }
                 }
                 else {
@@ -210,8 +187,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // save newProductQty to MyApp and retrieve it to update
                 ((MyApp)getApplication()).newProductQty = newProductQty;
 
-
-
                 onButtonShowPopupWindowClick(view);
 
                 // update product quantity
@@ -225,6 +200,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         purchasedTotal, purchaseDate);
 
                 ((MyApp)getApplication()).historyList.add(productHistory);
+
+                // Save inventory (quantities of each product) for restocking purposes
+                saveInventory();
 
             }
             else {
@@ -319,6 +297,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /*
         https://stackoverflow.com/questions/1397361/how-to-restart-activity-in-android
         */
+    }
+
+    public void saveInventory() {
+
+        // inventory array indices: Pants = 0, Shoes = 1, Hats = 2
+
+        // Saving inventory after each purchase into MyApp
+        ((MyApp)getApplication()).inventory[0] = currentStock.get(0).getProductQty();
+        ((MyApp)getApplication()).inventory[1] = currentStock.get(1).getProductQty();
+        ((MyApp)getApplication()).inventory[2] = currentStock.get(2).getProductQty();
+
+        ((MyApp)getApplication()).store = currentStock;
+
     }
 
 

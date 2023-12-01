@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Manager extends AppCompatActivity implements View.OnClickListener{
 
-    Button buttonHistory;
+    Button buttonHistory, buttonRestock;
     ArrayList<History> historyList;
 
     @Override
@@ -20,9 +20,12 @@ public class Manager extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_manager);
 
         buttonHistory = findViewById(R.id.buttonHistory);
+        buttonRestock = findViewById(R.id.buttonRestock);
 
         buttonHistory.setOnClickListener(this);
         historyList =  (ArrayList<History>) getIntent().getSerializableExtra("purchaseHistory");
+
+        buttonRestock.setOnClickListener(this);
     }
 
     @Override
@@ -35,6 +38,10 @@ public class Manager extends AppCompatActivity implements View.OnClickListener{
 //            historyList = ((MyApp)getApplication()).historyList;
 //            toHistoryIntent.putExtra("purchaseHistory", historyList);
             startActivity(toHistoryListIntent);
+        }
+        else if (id == R.id.buttonRestock) {
+            Intent toRestockIntent = new Intent(this, RestockActivity.class);
+            startActivity(toRestockIntent);
         }
 
     }

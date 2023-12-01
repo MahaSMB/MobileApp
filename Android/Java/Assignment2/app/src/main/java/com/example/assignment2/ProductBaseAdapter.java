@@ -20,9 +20,9 @@ public class ProductBaseAdapter extends BaseAdapter {
         activityContext = context;
     }
 
-    public void clearArrayListOfProducts() {
-        arrayListOfProducts.clear();
-    }
+//    public void clearArrayListOfProducts() {
+//        arrayListOfProducts.clear();
+//    }
 
     @Override
     public int getCount() {
