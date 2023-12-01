@@ -16,7 +16,9 @@
         <activity
             android:name=".RestockActivity"
             android:exported="true"
-            android:label="Restock" >
+            android:label="Restock"
+            android:screenOrientation="sensor"
+            android:configChanges="orientation">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".Manager" />
@@ -25,7 +27,9 @@
             android:name=".HistoryDetails"
             android:exported="true"
             android:label="History Details"
-            android:theme="@style/Theme.Assignment2">
+            android:theme="@style/Theme.Assignment2"
+            android:screenOrientation="sensor"
+            android:configChanges="orientation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".RecyclerViewHistoryActivity" />
@@ -33,7 +37,9 @@
         <activity
             android:name=".Manager"
             android:exported="true"
-            android:label="@string/title_activity_manager">
+            android:label="@string/title_activity_manager"
+            android:screenOrientation="sensor"
+            android:configChanges="orientation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -41,7 +47,9 @@
         <activity
             android:name=".RecyclerViewHistoryActivity"
             android:exported="true"
-            android:label="Purchase History">
+            android:label="Purchase History"
+            android:screenOrientation="sensor"
+            android:configChanges="orientation" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Manager" />
