@@ -21,6 +21,8 @@ public class RecyclerViewHistoryActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_list);
 
+
+        // Retrieved from MainActivity's buttonBuy
         historyList = ((MyApp)getApplication()).historyList;
 
         rvHistoryList = findViewById(R.id.rvHistoryList);

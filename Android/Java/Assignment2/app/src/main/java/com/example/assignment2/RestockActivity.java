@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class RestockActivity extends AppCompatActivity implements View.OnClickListener{
 
-    ArrayList<History>  historyList;
+//    ArrayList<History>  historyList;
 
     ArrayList<Product> restockStore = new ArrayList<>();
 
@@ -46,12 +46,11 @@ public class RestockActivity extends AppCompatActivity implements View.OnClickLi
         buttonCancel.setOnClickListener(this);
         editTextRestock.setOnClickListener(this);
 
-        historyList = ((MyApp)getApplication()).historyList;
+//        historyList = ((MyApp)getApplication()).historyList;
 
         restockStore = ((MyApp)getApplication()).store;
 
         ProductBaseAdapter productBaseAdapter = new ProductBaseAdapter(restockStore, this);
-
 
         listviewRestock.setAdapter(productBaseAdapter);
 

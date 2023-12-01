@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView listViewStore;
     int quantityEntered, selectedProductQty, newProductQty;
 
-    ArrayList<Product> currentStock = new ArrayList<>();
+    ArrayList<Product> currentStock;
 
     Button button1, button2, button3, button4, button5, button6, button7, button8, button9,
             button0, buttonClear, buttonBuy, buttonManager;
@@ -47,25 +47,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         currentStock = ((MyApp)getApplication()).store;
 
-        quantityEntered = Integer.parseInt(textViewQuantity.getText().toString());
+        Log.d("populated currentStock", "From MyApp.store. Size: " + currentStock.size());
 
-        //currentStock = (ArrayList<Product>) getIntent().getSerializableExtra("store");
+        quantityEntered = Integer.parseInt(textViewQuantity.getText().toString());
 
         ((MyApp)getApplication()).mainActivityContext = MainActivity.this;
 
         ProductBaseAdapter productBaseAdapter = new ProductBaseAdapter(currentStock, this);
-//        ((MyApp)getApplication()).productBaseAdapter = productBaseAdapter;
 
         listViewStore.setAdapter(productBaseAdapter);
 
+        if (currentStock.size() < 3) {
+            // Populate the store
+            Product pants = new Product("Pants", 10, 20.44);
+            Product shoes = new Product("Shoes", 100, 10.44);
+            Product hats = new Product("Hats", 30, 5.90);
+            currentStock.add(pants);
+            Log.d("added to currentStock", "Product pants initial. Size: " + currentStock.size());
+            currentStock.add(shoes);
+            Log.d("added to currentStock", "Product shoes initial. Size: " + currentStock.size());
+            currentStock.add(hats);
+            Log.d("added to currentStock", "Product hats initial. Size: " + currentStock.size());
+        }
 
-        // Populate the store
-        Product pants = new Product("Pants", 10, 20.44);
-        Product shoes = new Product("Shoes", 100, 10.44);
-        Product hats = new Product("Hats", 30, 5.90);
-        currentStock.add(pants);
-        currentStock.add(shoes);
-        currentStock.add(hats);
 
         listViewStore.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -196,13 +200,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String purchasedProductName = currentStock.get(((MyApp)getApplication()).positionOfProduct).getProductName();
                 Double purchasedTotal = ((MyApp)getApplication()).totalPrice;
                 Date purchaseDate = new Date();
-                History productHistory = new History( purchasedProductName, newProductQty,
+                History productHistory = new History( purchasedProductName, quantityEntered,
                         purchasedTotal, purchaseDate);
 
+                // To be used in RecyclerViewHistoryActivity
                 ((MyApp)getApplication()).historyList.add(productHistory);
 
                 // Save inventory (quantities of each product) for restocking purposes
-                saveInventory();
+//                saveInventory();
 
             }
             else {
@@ -224,7 +229,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     void totalPrice(int amount, double itemPrice) {
         double totalPrice = amount * itemPrice;
         DecimalFormat df = new DecimalFormat("0.00");
-        //String stringTotalPrice = String.valueOf(df.format(totalPrice));
         textViewTotalPrice.setText(df.format(totalPrice));
 
         ((MyApp)getApplication()).totalPrice = totalPrice;
@@ -304,11 +308,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // inventory array indices: Pants = 0, Shoes = 1, Hats = 2
 
         // Saving inventory after each purchase into MyApp
-        ((MyApp)getApplication()).inventory[0] = currentStock.get(0).getProductQty();
-        ((MyApp)getApplication()).inventory[1] = currentStock.get(1).getProductQty();
-        ((MyApp)getApplication()).inventory[2] = currentStock.get(2).getProductQty();
+//        ((MyApp)getApplication()).inventory[0] = currentStock.get(0).getProductQty();
+//        ((MyApp)getApplication()).inventory[1] = currentStock.get(1).getProductQty();
+//        ((MyApp)getApplication()).inventory[2] = currentStock.get(2).getProductQty();
 
-        ((MyApp)getApplication()).store = currentStock;
+//        ((MyApp)getApplication()).store = currentStock;
 
     }
 
