@@ -3,21 +3,30 @@ package com.example.assignment3;
 public class Question {
     String question;
     boolean answer;
-    String colour;
 
+    int colour;
     public Question() {
     }
 
-    public Question(String question, boolean answer, String colour) {
+    public Question(String question, boolean answer, int colour) {
         this.question = question;
         this.answer = answer;
         this.colour = colour;
     }
 
-    public Question(String question, boolean answer) {
-        this.question = question;
-        this.answer = answer;
+    public String getQuestion() {
+        return question;
     }
 
+    public boolean isAnswer() {
+        return answer;
+    }
 
+    public int getColour() {
+        return colour;
+    }
+
+    public void setColour(int colour) {
+        this.colour = colour;
+    }
 }
