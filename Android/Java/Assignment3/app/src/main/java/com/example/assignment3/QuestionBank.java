@@ -7,9 +7,12 @@ import java.util.Collections;
 
 public class QuestionBank {
 
-    ArrayList<Integer> colours = new ArrayList<>(10);
+    ArrayList<Integer> colours;
     public ArrayList<Integer> getColours(Context context) {
         if (colours == null) {
+
+            colours = new ArrayList<>(10);
+
             colours.add(context.getColor(R.color.Blue));
             colours.add(context.getColor(R.color.ArmyBrown));
             colours.add(context.getColor(R.color.green));
@@ -28,9 +31,10 @@ public class QuestionBank {
 
     }
 
-    ArrayList<Question> questionsList = new ArrayList<>(10);
+    ArrayList<Question> questionsList;
     public ArrayList<Question> getQuestions(Context context) {
         if (questionsList == null) {
+            questionsList = new ArrayList<>(10);
             ArrayList<Integer> listOfColours = getColours(context);
             Collections.shuffle(listOfColours);
             questionsList.add(new Question(context.getResources().getString(R.string.question1), false, listOfColours.get(0)));

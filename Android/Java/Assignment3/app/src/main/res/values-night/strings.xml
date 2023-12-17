@@ -10,4 +10,6 @@
     <string name="question8">Hot and cold water sound the same when poured.</string>
     <string name="question9">Hippos sweat a red substance.</string>
     <string name="question10">All stars in the night sky are roughly the same size.</string>
+    <string name="correctAnswer">You were right!</string>
+    <string name="incorrectAnswer">Sorry, that\'s incorrect!</string>
 </resources>

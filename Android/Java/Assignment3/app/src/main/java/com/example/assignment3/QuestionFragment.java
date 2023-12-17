@@ -49,7 +49,7 @@ public class QuestionFragment extends Fragment {
        TextView textViewQuestion = view.findViewById(R.id.textViewQuestion);
 
        textViewQuestion.setText(question);
-       textViewQuestion.setBackgroundResource(colour);
+       textViewQuestion.setBackgroundColor(colour);
 
        return view;
     }

@@ -8,16 +8,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import java.util.ArrayList;
 
-    Context context;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     FrameLayout frameLayout;
     Button buttonTrue, buttonFalse;
     QuestionBank questionBank = new QuestionBank();
-    String currentQuestion;
-    int currentColour = 1;
+    int currentQuestionIndex, numberOfCorrectAnswers;
     ProgressBar detProgressBar;
+
+    ArrayList<Question> listOfShuffledQuestions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,32 +35,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonTrue.setOnClickListener(this);
         buttonFalse.setOnClickListener(this);
 
+        currentQuestionIndex = 0;
+        numberOfCorrectAnswers = 0;
 
-//        buttonTrue.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                addNewQuestionFragment();
-//    // make a single click listener for both true and false buttons
-//    // inside click listener check whether index == 10, if ==10 shuffle the question array again and question index set to 0 and repeat
-//    // if question index ==10 in that case write result to file system and the variables should be reset in MyApp
-//            }
-//        });
+        listOfShuffledQuestions = questionBank.getQuestions(this);
+        addNewQuestionFragment();
 
+    }
+
+//    public void addNewQuestion(String question, boolean answer) {
+//        questionBank.addNewQuestion(question, answer);
+//        // add number of questions to display
+//
+//    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        if (id == R.id.buttonTrue) {
+            if (listOfShuffledQuestions.get(currentQuestionIndex).isAnswer()) {
+                // If the user got the answer right
+                Toast.makeText(this, getString(R.string.correctAnswer), Toast.LENGTH_LONG).show();
+                numberOfCorrectAnswers++;
+            }
+            else {
+                // If the user got the answer wrong
+                Toast.makeText(this, getString(R.string.incorrectAnswer), Toast.LENGTH_LONG).show();
+            }
+        }
+        else if (id == R.id.buttonFalse) {
+            if (!listOfShuffledQuestions.get(currentQuestionIndex).isAnswer()) {
+                // If the user got the answer right
+                Toast.makeText(this, getString(R.string.correctAnswer), Toast.LENGTH_LONG).show();
+                numberOfCorrectAnswers++;
+            }
+            else {
+                // If the user got the answer wrong
+                Toast.makeText(this, getString(R.string.incorrectAnswer), Toast.LENGTH_LONG).show();
+            }
+        }
+
+        if (currentQuestionIndex < 10) {
+            //    // if question index ==10 in that case write result to file
+            //    system and the variables should be reset in MyApp
+
+            currentQuestionIndex++;
+        }
+        else {
+            // display total, shuffle question array
+            //    // inside click listener check whether index == 10, if ==10 shuffle the question
+            //    //array again and question index set to 0 and repeat
+
+            currentQuestionIndex = 0;
+            numberOfCorrectAnswers = 0;
+            listOfShuffledQuestions = questionBank.getQuestions(this);
+        }
+        // add new question fragment
+        addNewQuestionFragment();
 
     }
 
     public void addNewQuestionFragment() {
-        QuestionFragment newQuestionFragment = QuestionFragment.newInstance(currentQuestion, currentColour);
-        //QuestionFragment newQuestionFragment = QuestionFragment.newInstance(, currentColour);
-        QuestionFragment checkFragment = (QuestionFragment) getSupportFragmentManager().findFragmentById(R.id.frameLayout);
-        if (checkFragment != null) {
-            getSupportFragmentManager().beginTransaction().remove(checkFragment).commit();
-        }
-            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout, newQuestionFragment).commit();
-    }
-
-    @Override
-    public void onClick(View v) {
-
+        QuestionFragment newQuestionFragment = QuestionFragment.newInstance(
+                listOfShuffledQuestions.get(currentQuestionIndex).getQuestion(),
+                listOfShuffledQuestions.get(currentQuestionIndex).getColour());
+        getSupportFragmentManager().beginTransaction().add(R.id.frameLayout,
+                newQuestionFragment).commit();
     }
 }
