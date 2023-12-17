@@ -13,9 +13,9 @@ public class QuestionBank {
 
             colours = new ArrayList<>(10);
 
-            colours.add(context.getColor(R.color.Blue));
+            colours.add(context.getColor(R.color.darkcyan));
             colours.add(context.getColor(R.color.ArmyBrown));
-            colours.add(context.getColor(R.color.green));
+            colours.add(context.getColor(R.color.forestgreen));
             colours.add(context.getColor(R.color.red));
             colours.add(context.getColor(R.color.yellow));
             colours.add(context.getColor(R.color.whitesmoke));

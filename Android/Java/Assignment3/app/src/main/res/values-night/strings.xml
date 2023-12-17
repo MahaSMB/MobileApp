@@ -12,4 +12,7 @@
     <string name="question10">All stars in the night sky are roughly the same size.</string>
     <string name="correctAnswer">You were right!</string>
     <string name="incorrectAnswer">Sorry, that\'s incorrect!</string>
+    <string name="save_results">SAVE RESULTS</string>
+    <string name="ignore_results">IGNORE</string>
+    <string name="YourResultsAre">Your score is: %1$d / %2$d</string>
 </resources>
