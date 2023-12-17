@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,13 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class QuestionFragment extends Fragment {
-
-    interface trueFalseClickListener{
-        void trueButtonClicked();
-        void falseButtonClick();
-    }
-
-    trueFalseClickListener listener;
 
     static String question;
     static int colour;
@@ -51,13 +45,11 @@ public class QuestionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        super.onCreateView(inflater, container, savedInstanceState);
 
-       View view = inflater.inflate(R.layout.fragment, container, false);
+       View view = inflater.inflate(R.layout.question_fragment, container, false);
        TextView textViewQuestion = view.findViewById(R.id.textViewQuestion);
 
        textViewQuestion.setText(question);
        textViewQuestion.setBackgroundResource(colour);
-
-
 
        return view;
     }
@@ -66,4 +58,14 @@ public class QuestionFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
+
+//    public void addNewQuestionFragment() {
+//        QuestionFragment newQuestionFragment = QuestionFragment.newInstance(currentQuestion, currentColour);
+//        //QuestionFragment newQuestionFragment = QuestionFragment.newInstance(, currentColour);
+//        QuestionFragment checkFragment = (QuestionFragment) getSupportFragmentManager().findFragmentById(R.id.frameLayout);
+//        if (checkFragment != null) {
+//            getSupportFragmentManager().beginTransaction().remove(checkFragment).commit();
+//        }
+//        getSupportFragmentManager().beginTransaction().add(R.id.frameLayout, newQuestionFragment).commit();
+//    }
 }
