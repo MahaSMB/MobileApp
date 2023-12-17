@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ResultDialogFragment.saveResult {
 
     FrameLayout frameLayout;
     Button buttonTrue, buttonFalse;
@@ -76,34 +76,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, getString(R.string.incorrectAnswer), Toast.LENGTH_LONG).show();
             }
         }
-
-        if (currentQuestionIndex < numberOfQuestionsInQuiz) {
-            //    // if question index ==10 in that case write result to file
-            //    system and the variables should be reset in MyApp
+        if (currentQuestionIndex < numberOfQuestionsInQuiz - 1) {
+            // If question index is less than number of questions in quiz:
+            // - write to file
+            // - Increase question index
+            // - update progress bar
+            // otherwise system and variables should be reset in MyApp
 
             currentQuestionIndex++;
             // Update progress bar
             progress = (currentQuestionIndex * 100) / numberOfQuestionsInQuiz ;
             detProgressBar.setProgress(progress);
         }
-        else {
-            // display total, shuffle question array
-            //    // inside click listener check whether index == 10, if ==10 shuffle the question
-            //    //array again and question index set to 0 and repeat
+        else { // User has reached the last question
             int score = numberOfCorrectAnswers / numberOfQuestionsInQuiz;
+
+            // Create the Alert dialogue
+            // Set the string, feed the score (number of correct answers / number of questions in quiz )
             ResultDialogFragment resultDialogFragment = ResultDialogFragment.newInstance(
                     getString(R.string.YourResultsAre, numberOfCorrectAnswers, numberOfQuestionsInQuiz),
                     numberOfCorrectAnswers);
 
+            // Set the context for the listener
+            resultDialogFragment.listener = this;
+            // Show the score in the alert dialogue with title 'Results'
+            resultDialogFragment.show(getSupportFragmentManager(), "Results");
+
+            // Reset values now that I've reached the last question
             currentQuestionIndex = 0;
             numberOfCorrectAnswers = 0;
             progress = 0;
+            
+            // Shuffle the questions
             listOfShuffledQuestions = questionBank.getQuestions(this);
+
+            // Reset the progress bar to the above value of 0
             detProgressBar.setProgress(progress);
         }
         // add new question fragment
         addNewQuestionFragment();
-
     }
 
     public void addNewQuestionFragment() {
@@ -115,12 +126,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             QuestionFragment oldFragment = new QuestionFragment();
             getSupportFragmentManager().beginTransaction().remove(checkFragment).commit();
         }
-
         // Add a new fragment
         QuestionFragment newQuestionFragment = QuestionFragment.newInstance(
                 listOfShuffledQuestions.get(currentQuestionIndex).getQuestion(),
                 listOfShuffledQuestions.get(currentQuestionIndex).getColour());
         getSupportFragmentManager().beginTransaction().add(R.id.frameLayout,
                 newQuestionFragment).commit();
+    }
+
+    @Override
+    public void saveResult(int numberCorrect) {
+
     }
 }
