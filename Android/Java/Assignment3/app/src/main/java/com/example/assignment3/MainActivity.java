@@ -2,7 +2,6 @@ package com.example.assignment3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +21,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ProgressBar detProgressBar;
 
     ArrayList<Question> listOfShuffledQuestions = new ArrayList<>();
+    ArrayList<Integer> listOfCorrectAnswers = new ArrayList<>();
+
+    FileManager fileManager = new FileManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         listOfShuffledQuestions = questionBank.getQuestions(this);
         addNewQuestionFragment();
+
+        fileManager = ((MyApp)getApplication()).fileManager;
+
+        ((MyApp)getApplication()).numberOfCorrectAnswers = numberOfCorrectAnswers;
 
     }
 
@@ -95,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // Set the string, feed the score (number of correct answers / number of questions in quiz )
             ResultDialogFragment resultDialogFragment = ResultDialogFragment.newInstance(
                     getString(R.string.YourResultsAre, numberOfCorrectAnswers, numberOfQuestionsInQuiz),
-                    numberOfCorrectAnswers);
+                    numberOfCorrectAnswers, numberOfQuestionsInQuiz);
 
             // Set the context for the listener
             resultDialogFragment.listener = this;
@@ -103,10 +109,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             resultDialogFragment.show(getSupportFragmentManager(), "Results");
 
             // Reset values now that I've reached the last question
+            listOfCorrectAnswers.add(numberOfCorrectAnswers); // saving to add to the average
             currentQuestionIndex = 0;
             numberOfCorrectAnswers = 0;
             progress = 0;
-            
+
             // Shuffle the questions
             listOfShuffledQuestions = questionBank.getQuestions(this);
 
@@ -135,7 +142,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void saveResult(int numberCorrect) {
+    public void saveNumberOfCorrectAnswersToFile(int numberOfCorrectAnswers, int numberOfQuestionsInQuiz) {
+        fileManager.writeResultsToFile(MainActivity.this, numberOfCorrectAnswers,
+                numberOfQuestionsInQuiz);
 
+        //((MyApp)getApplication()).fileManager = fileManager;
+
+        Toast.makeText(MainActivity.this, getString(R.string.resultsAreSaved), Toast.LENGTH_SHORT).show();
+    }
+
+    public double getAverage(ArrayList<Integer> listOfCorrectAnswers, int numberOfQuestionsInQuiz) {
+        int total = 0;
+        for (int CorrectAnswers:listOfCorrectAnswers) {
+            total =+ CorrectAnswers;
+        }
+
+        double mean = total / numberOfQuestionsInQuiz;
+
+        return mean;
     }
 }

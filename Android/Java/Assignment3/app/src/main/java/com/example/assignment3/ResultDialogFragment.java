@@ -11,18 +11,20 @@ import androidx.fragment.app.DialogFragment;
 public class ResultDialogFragment extends DialogFragment {
 
     interface saveResult {
-        void saveResult(int numberCorrect);
+        void saveNumberOfCorrectAnswersToFile(int numberOfCorrectAnswers, int numberOfQuestionsInQuiz);
     }
 
     saveResult listener;
 
     static String msg = "";
-    static String title = "Results";
-    static int numberOfCorrectAnswers;
 
-    public static ResultDialogFragment newInstance(String message, int numberCorrect) {
+    static int numberOfCorrectAnswers;
+    static int numberOfQuestionsInQuiz;
+
+    public static ResultDialogFragment newInstance(String message, int numberCorrect, int QuestionsInQuiz) {
         msg = message;
         numberOfCorrectAnswers = numberCorrect;
+        numberOfQuestionsInQuiz = QuestionsInQuiz;
         return new ResultDialogFragment();
     }
 
@@ -31,8 +33,10 @@ public class ResultDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new AlertDialog.Builder(requireContext())
                 .setMessage(msg)
-                .setPositiveButton(getString(R.string.save_results), (dialog, which) -> listener.saveResult(numberOfCorrectAnswers))
+                .setPositiveButton(getString(R.string.save_results), (dialog, which) ->
+                        listener.saveNumberOfCorrectAnswersToFile(numberOfCorrectAnswers, numberOfQuestionsInQuiz))
                 .setNegativeButton(getString(R.string.ignore_results), (dialog, which) -> dismiss())
+                .setTitle(R.string.resultDialogTitle)
                 .create();
     }
 
