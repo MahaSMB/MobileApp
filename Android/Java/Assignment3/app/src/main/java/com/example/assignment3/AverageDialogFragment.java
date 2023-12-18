@@ -13,17 +13,17 @@ import java.util.ArrayList;
 public class AverageDialogFragment extends DialogFragment {
 
     interface saveAverage {
-        void saveAverageAttemptsToFile(int averageScore, int numberOfAttempts);
+        void saveAverageAttemptsToFile(double averageScore, double numberOfAttempts);
     }
 
     saveAverage listener;
 
     static String msg = "";
 
-    static int averageScore;
-    static int numberOfAttempts;
+    static double averageScore;
+    static double numberOfAttempts;
 
-    public static AverageDialogFragment newInstance(String message, int average, int attempts) {
+    public static AverageDialogFragment newInstance(String message, double average, double attempts) {
         msg = message;
         averageScore = average;
         numberOfAttempts = attempts;

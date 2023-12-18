@@ -20,4 +20,5 @@
     <string name="averageDialogTitle">Average Score</string>
     <string name="save_averages">SAVE</string>
     <string name="ignore_averages">IGNORE</string>
+    <string name="YourAverageIs">Your average is %2.2f in %2.2f attempts.</string>
 </resources>

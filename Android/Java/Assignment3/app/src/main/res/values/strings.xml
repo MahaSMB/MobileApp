@@ -14,10 +14,11 @@
     <string name="incorrectAnswer">Sorry, that\'s incorrect!</string>
     <string name="save_results">SAVE RESULTS</string>
     <string name="ignore_results">IGNORE</string>
-    <string name="YourResultsAre">Your score is: %2$d / %2$d</string>
+    <string name="YourResultsAre">Your score is: %1$d / %2$d</string>
     <string name="resultDialogTitle">Results</string>
     <string name="resultsAreSaved">Your results have been saved.</string>
     <string name="averageDialogTitle">Average Score</string>
     <string name="save_averages">SAVE</string>
     <string name="ignore_averages">IGNORE</string>
+    <string name="YourAverageIs">Your average is %2.2f in %2.2f attempts.</string>
 </resources>

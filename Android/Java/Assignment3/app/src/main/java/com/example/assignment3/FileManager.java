@@ -24,9 +24,9 @@ public class FileManager {
         }
     }
 
-    public void writeAverageScoreAndAttemptsToFile(Context context, int averageScore,  int numberOfAttempts) {
+    public void writeAverageScoreAndAttemptsToFile(Context context, double averageScore,  double numberOfAttempts) {
 
-        String averageAndAttempt = "Your average is" + averageScore + " in " + numberOfAttempts + "attempts.";
+        String averageAndAttempt = "Average: " + averageScore + " in " + numberOfAttempts + " attempts.";
 
         try {
             FileOutputStream fileOutputStream;
