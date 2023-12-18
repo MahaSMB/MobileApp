@@ -1,23 +1,29 @@
 package com.example.assignment3;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ResultDialogFragment.saveResult {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ResultDialogFragment.saveResult, AverageDialogFragment.saveAverage {
 
     FrameLayout frameLayout;
     Button buttonTrue, buttonFalse;
     QuestionBank questionBank = new QuestionBank();
     int currentQuestionIndex, numberOfCorrectAnswers, progress, numberOfQuestionsInQuiz;
+    int averageScore, numberOfAttempts;
     ProgressBar detProgressBar;
 
     ArrayList<Question> listOfShuffledQuestions = new ArrayList<>();
@@ -151,14 +157,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(MainActivity.this, getString(R.string.resultsAreSaved), Toast.LENGTH_SHORT).show();
     }
 
-    public double getAverage(ArrayList<Integer> listOfCorrectAnswers, int numberOfQuestionsInQuiz) {
+    public double[] getAverage(ArrayList<Integer> listOfCorrectAnswers, int numberOfQuestionsInQuiz) {
         int total = 0;
         for (int CorrectAnswers:listOfCorrectAnswers) {
             total =+ CorrectAnswers;
         }
 
-        double mean = total / numberOfQuestionsInQuiz;
+        int numberOfAttempts = listOfCorrectAnswers.size();
 
-        return mean;
+        double mean = total / numberOfQuestionsInQuiz;
+        DecimalFormat df = new DecimalFormat("0.00" );
+        mean = Double.parseDouble(df.format(mean));
+
+        double[] averageAndAttempt = {mean, numberOfAttempts};
+
+        return averageAndAttempt;
     }
+
+    public void getChosenNumberOfQuestions() {
+
+    }
+
+    public void resetSavedResults() {
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.quiz_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.getAverage_menu:
+                getAverage(listOfCorrectAnswers, numberOfQuestionsInQuiz);
+                // Show alert dialogue
+                return true;
+            case R.id.chooseNumberOfQuestions_menu:
+                getChosenNumberOfQuestions();
+                return true;
+            case R.id.resetSavedResults_menu:
+                resetSavedResults();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
+    @Override
+    public void saveAverageAttemptsToFile(int averageScore, int numberOfAttempts) {
+        fileManager.writeAverageScoreAndAttemptsToFile(MainActivity.this, averageScore, numberOfAttempts);
+
+        //((MyApp)getApplication()).fileManager = fileManager;
+
+        Toast.makeText(MainActivity.this, getString(R.string.resultsAreSaved), Toast.LENGTH_SHORT).show();
+    }
+
+
 }

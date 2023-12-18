@@ -16,9 +16,9 @@ public class QuestionBank {
             colours.add(context.getColor(R.color.darkcyan));
             colours.add(context.getColor(R.color.ArmyBrown));
             colours.add(context.getColor(R.color.forestgreen));
-            colours.add(context.getColor(R.color.red));
-            colours.add(context.getColor(R.color.yellow));
-            colours.add(context.getColor(R.color.whitesmoke));
+            colours.add(context.getColor(R.color.indianred));
+            colours.add(context.getColor(R.color.lightyellow));
+            colours.add(context.getColor(R.color.Ash_Gray));
             colours.add(context.getColor(R.color.mediumpurple));
             colours.add(context.getColor(R.color.Celeste));
             colours.add(context.getColor(R.color.pink));

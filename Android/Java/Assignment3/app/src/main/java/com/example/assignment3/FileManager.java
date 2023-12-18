@@ -23,4 +23,19 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
+    public void writeAverageScoreAndAttemptsToFile(Context context, int averageScore,  int numberOfAttempts) {
+
+        String averageAndAttempt = "Your average is" + averageScore + " in " + numberOfAttempts + "attempts.";
+
+        try {
+            FileOutputStream fileOutputStream;
+            fileOutputStream = context.openFileOutput(fileName, Context.MODE_APPEND);
+            fileOutputStream.write((averageAndAttempt + "\r\n").getBytes());
+            Log.d("Writing to File", "Saving average and attempts");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
