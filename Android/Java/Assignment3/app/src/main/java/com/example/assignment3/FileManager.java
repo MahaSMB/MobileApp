@@ -3,6 +3,7 @@ package com.example.assignment3;
 import android.content.Context;
 import android.util.Log;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -38,4 +39,19 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
+    void deleteAllValuesFromFile(Context context){
+        try {
+            FileOutputStream fileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            fileOutputStream.write(("").getBytes());
+            Log.d("Deleting", "Deleting file contents");
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

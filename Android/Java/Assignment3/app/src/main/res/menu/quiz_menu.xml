@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/getAverage_menu" android:title="Get your average" />
-    <item android:id="@+id/chooseNumberOfQuestions_menu" android:title="Choose # of questions" />
-    <item android:id="@+id/resetSavedResults_menu" android:title="Reset  saved results" />
+<item android:id="@+id/getAverage_menu" android:title="@string/get_your_average" />
+    <item android:id="@+id/chooseNumberOfQuestions_menu" android:title="@string/choose_of_questions" />
+    <item android:id="@+id/resetSavedResults_menu" android:title="@string/reset_saved_results" />
 </menu>

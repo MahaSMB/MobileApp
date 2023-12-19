@@ -3,6 +3,7 @@ package com.example.assignment3;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,13 +18,14 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ResultDialogFragment.saveResult, AverageDialogFragment.saveAverage {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+        ResultDialogFragment.saveResult, AverageDialogFragment.saveAverage, ResetResultsDialogFragment.resetResults {
 
     FrameLayout frameLayout;
     Button buttonTrue, buttonFalse;
     QuestionBank questionBank = new QuestionBank();
     int currentQuestionIndex, numberOfCorrectAnswers, progress, numberOfQuestionsInQuiz;
-    double averageScore, numberOfAttempts;
+    //double averageScore, numberOfAttempts;
     ProgressBar detProgressBar;
 
     ArrayList<Question> listOfShuffledQuestions = new ArrayList<>();
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         QuestionFragment checkFragment = (QuestionFragment) getSupportFragmentManager().findFragmentById(R.id.frameLayout);
         if (checkFragment != null) {
             // Remove the old fragment
-            QuestionFragment oldFragment = new QuestionFragment();
+//            QuestionFragment oldFragment = new QuestionFragment();
             getSupportFragmentManager().beginTransaction().remove(checkFragment).commit();
         }
         // Add a new fragment
@@ -183,9 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void resetSavedResults() {
 
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -216,7 +216,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getChosenNumberOfQuestions();
                 return true;
             case R.id.resetSavedResults_menu:
-                resetSavedResults();
+                //resetSavedResults();
+
+                // Show Reset Results alert dialogue
+                ResetResultsDialogFragment resetResultsFragment = ResetResultsDialogFragment.newInstance(
+                        getString(R.string.deleteAreYouSure));
+
+                // Set the context for the listener
+                resetResultsFragment.listener = MainActivity.this;
+                // Show the alert dialogue with title 'Reset Results'
+                resetResultsFragment.show(getSupportFragmentManager(), "Reset Results");
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -229,9 +239,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void saveAverageAttemptsToFile(double averageScore, double numberOfAttempts) {
         fileManager.writeAverageScoreAndAttemptsToFile(MainActivity.this, averageScore, numberOfAttempts);
 
-        //((MyApp)getApplication()).fileManager = fileManager;
-
         Toast.makeText(MainActivity.this, getString(R.string.resultsAreSaved), Toast.LENGTH_SHORT).show();
+    }
+
+    public void resetSavedResults() {
+        fileManager.deleteAllValuesFromFile(MainActivity.this);
+
+        Toast.makeText(MainActivity.this, getString(R.string.resultsAreDeleted), Toast.LENGTH_LONG).show();
     }
 
 

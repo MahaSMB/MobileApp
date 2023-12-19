@@ -21,4 +21,11 @@
     <string name="save_averages">SAVE</string>
     <string name="ignore_averages">IGNORE</string>
     <string name="YourAverageIs">Your average is %2.2f in %2.2f attempts.</string>
+    <string name="resultsAreDeleted">Your results have been deleted.</string>
+    <string name="resetDialogTitle">Confirm Results Reset</string>
+    <string name="delete_results">DELETE</string>
+    <string name="deleteAreYouSure">Are you sure you want to delete your results? This can\'t be undone.</string>
+    <string name="get_your_average">Get your average</string>
+    <string name="choose_of_questions">Choose # of questions</string>
+    <string name="reset_saved_results">Reset saved results</string>
 </resources>
