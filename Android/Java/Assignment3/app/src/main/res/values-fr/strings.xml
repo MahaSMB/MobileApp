@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Assignment 3</string>
+    <string name="question1">La foudre ne peut pas frapper deux fois au même endroit.</string>
+    <string name="question2">L\'Afrique du Sud a trois capitales.</string>
+    <string name="question3">Toutes vos papilles gustatives sont sur votre langue.</string>
+    <string name="question4">Les gens naissent avec plus d’os qu’à l’âge adulte.</string>
+    <string name="question5">Les gens naissent avec plus d’os qu’à l’âge adulte.</string>
+    <string name="question6">Le premier film d’animation en couleur de Disney était Blanche-Neige et les Sept Nains.</string>
+    <string name="question7">Vénus est la planète la plus chaude du système solaire</string>
+    <string name="question8">L\'eau chaude et l\'eau froide ont le même son lorsqu\'elles sont versées.</string>
+    <string name="question9">Les hippopotames transpirent une substance rouge.</string>
+    <string name="question10">Toutes les étoiles du ciel nocturne ont à peu près la même taille.</string>
+    <string name="correctAnswer">Tu avais raison!</string>
+    <string name="incorrectAnswer">Désolé, c\'est incorrect!</string>
+    <string name="save_results">ENREGISTRER LES RÉSULTATS</string>
+    <string name="ignore_results">IGNORER</string>
+    <string name="YourResultsAre">Ton score est: %1$d / %2$d</string>
+    <string name="resultDialogTitle">Résultats</string>
+    <string name="resultsAreSaved">Vos résultats ont été enregistrés..</string>
+    <string name="averageDialogTitle">Score moyen</string>
+    <string name="save_averages">RÉSERVER</string>
+    <string name="ignore_averages">IGNORER</string>
+    <string name="YourAverageIs">Votre moyenne est de %2.2f en %2.2f tentatives.</string>
+    <string name="resultsAreDeleted">Vos résultats ont été supprimés.</string>
+    <string name="resetDialogTitle">Confirmer la réinitialisation des résultats</string>
+    <string name="delete_results">EFFACER</string>
+    <string name="deleteAreYouSure">Êtes-vous sûr de vouloir effacer vos résultats? Cela ne peut pas être annulé.</string>
+    <string name="get_your_average">Obtenez votre moyenne</string>
+    <string name="choose_of_questions">Choisissez # de questions</string>
+    <string name="reset_saved_results">"Réinitialiser les résultats "</string>
+    <string name="false_button">Faux</string>
+    <string name="true_button">Vraie</string>
+</resources>

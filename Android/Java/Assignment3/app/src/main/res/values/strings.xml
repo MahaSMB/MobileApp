@@ -28,4 +28,7 @@
     <string name="get_your_average">Get your average</string>
     <string name="choose_of_questions">Choose # of questions</string>
     <string name="reset_saved_results">Reset saved results</string>
+    <string name="false_button">False</string>
+    <string name="true_button">True</string>
+
 </resources>

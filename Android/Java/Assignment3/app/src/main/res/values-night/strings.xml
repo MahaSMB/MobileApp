@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Assignment 3</string>
     <string name="question1">Lightning can’t strike in the same place twice.</string>
     <string name="question2">South Africa has three capitals.</string>
     <string name="question3">All of your taste buds are on your tongue.</string>
@@ -14,7 +14,7 @@
     <string name="incorrectAnswer">Sorry, that\'s incorrect!</string>
     <string name="save_results">SAVE RESULTS</string>
     <string name="ignore_results">IGNORE</string>
-    <string name="YourResultsAre">Your score is: %2$d / %2$d</string>
+    <string name="YourResultsAre">Your score is: %1$d / %2$d</string>
     <string name="resultDialogTitle">Results</string>
     <string name="resultsAreSaved">Your results have been saved.</string>
     <string name="averageDialogTitle">Average Score</string>
@@ -28,4 +28,6 @@
     <string name="get_your_average">Get your average</string>
     <string name="choose_of_questions">Choose # of questions</string>
     <string name="reset_saved_results">Reset saved results</string>
+    <string name="false_button">False</string>
+    <string name="true_button">True</string>
 </resources>
