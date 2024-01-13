@@ -3,7 +3,6 @@ package com.example.assignment4;
 import android.content.Context;
 import androidx.room.Room;
 
-
 import java.util.List;
 
 public class DatabaseManager {

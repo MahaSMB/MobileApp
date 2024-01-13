@@ -24,6 +24,10 @@ public class Pokemon implements Parcelable {
         this.pokeProfile = pokeProfile;
     }
 
+    public Pokemon(int pokeID) {
+        this.pokeID = pokeID;
+    }
+
     /*
 
         public City(String cityRow){

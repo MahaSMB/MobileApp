@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class JSONManager {
 
     Pokemon fromJSONtoPokemonObj (String json) {
@@ -21,6 +23,22 @@ public class JSONManager {
             e.printStackTrace();
         }
         return pokemonObject;
+    }
+
+    ArrayList<Pokemon> fromJSONtoArrayListOfPokemon(String json) {
+        ArrayList<Pokemon> list = new ArrayList<>(0);
+
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                list.add(new Pokemon(Integer.parseInt(jsonArray.get(i).toString())));
+            }
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
 }
