@@ -15,6 +15,14 @@ public class Pokemon implements Parcelable {
     String pokeName;
     String pokeProfile;
 
+    public void setPokeName(String pokeName) {
+        this.pokeName = pokeName;
+    }
+
+    public void setPokeProfile(String pokeProfile) {
+        this.pokeProfile = pokeProfile;
+    }
+
     public Pokemon() {
     }
 
@@ -63,10 +71,7 @@ public class Pokemon implements Parcelable {
         return pokeProfile;
     }
 
-    public void setPokeProfile(String pokeProfile) {
 
-        this.pokeProfile = pokeProfile;
-    }
 
 
 
@@ -88,10 +93,7 @@ public class Pokemon implements Parcelable {
         return pokeName;
     }
 
-    public void setPokeName(String pokeName) {
 
-        this.pokeName = pokeName;
-    }
 
     @Override
     public int describeContents() {

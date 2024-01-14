@@ -30,7 +30,7 @@
 <!--        app:layout_constraintTop_toTopOf="@+id/guideline1" />-->
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listviewPokemon"
+        android:id="@+id/recviewPokemon"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginBottom="4dp"

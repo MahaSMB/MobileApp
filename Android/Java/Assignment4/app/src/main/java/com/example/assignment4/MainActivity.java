@@ -2,13 +2,18 @@ package com.example.assignment4;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -39,23 +44,69 @@ public class MainActivity extends AppCompatActivity implements
         networkingManager = ((MyApp)getApplication()).networkingManager;
         jsonManager = ((MyApp)getApplication()).jsonManager;
         networkingManager.listener = this;
-
+//        for (int i = 0; i < 6; i++) {
+//            String pokeURL =  "https://pokeapi.co/api/v2/pokemon/${i}/";
+//            Log.d("test", "testing " + pokeURL);
+//        }
         adapter = new PokemonRecyclerAdapter(this, pokeList);
         adapter.listener = this;
-        recyclerView = findViewById(R.id.listviewPokemon);
+        recyclerView = findViewById(R.id.recviewPokemon);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        int listSize = pokeList.size();
-        Log.d("List size", "List Size: " + listSize);
+//        int listSize = pokeList.size();
+//        Log.d("List size", "List Size: " + listSize);
+//
+//        for (int i = 0; i < 6; i ++) {
+//            Pokemon newPokemon = new Pokemon(i);
+//            pokeList.add(newPokemon);
+//        }
+//
+//        int listSizeAfter = pokeList.size();
+//        Log.d("List size", "List Size: " + listSizeAfter);
+    }
 
-        for (int i = 0; i < 6; i ++) {
-            Pokemon newPokemon = new Pokemon(i);
-            pokeList.add(newPokemon);
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.searchpokemon, menu);
+        getMenuInflater().inflate(R.menu.optionmenu, menu);
+        SearchView menuSearchItem = (SearchView) menu.findItem(R.id.searchbar_menu_item).getActionView();
+        menuSearchItem.setQueryHint("Search for Pokemon");
+        menuSearchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if (s.length() > 2){
+                    networkingManager.getPokemon(s);
+                }
+                else {
+                    adapter.pokeList = new ArrayList<>(0);
+                    adapter.notifyDataSetChanged();
+                }
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case 1:
+                Intent intent = new Intent(this, PokemonActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        int listSizeAfter = pokeList.size();
-        Log.d("List size", "List Size: " + listSizeAfter);
     }
 
     @Override
@@ -65,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void networkingFinishWithJSONString(String json) {
-        pokeList = jsonManager.fromJSONtoArrayListOfPokemon(json);
+        pokeList = jsonManager.fromJSONtoPokemonObj(json); // returns pokemon list read from pokeapi
         adapter.pokeList = pokeList;
         adapter.notifyDataSetChanged();
     }
@@ -78,6 +129,9 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onPokemonSelected(Pokemon selectedPokemon) {
         // Go to pokemon details page
+        Intent toPokemon = new Intent(this, PokemonActivity.class);
+        toPokemon.putExtra("city",selectedPokemon);
+        startActivity(toPokemon);
     }
 
     @Override

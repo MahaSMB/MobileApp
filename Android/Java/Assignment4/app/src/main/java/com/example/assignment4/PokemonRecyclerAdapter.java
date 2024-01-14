@@ -48,9 +48,10 @@ public class PokemonRecyclerAdapter extends
 
         TextView tvPokemonID = holder.itemView.findViewById(R.id.tvPokemonID);
         TextView tvPokemonName = holder.itemView.findViewById(R.id.tvPokemonName);
-        //ImageView ivPokemonProfile = holder.itemView.findViewById(R.id.ivPokemonProfile);
+        // ImageView ivPokemonProfile = holder.itemView.findViewById(R.id.ivPokemonProfile);
 
-        tvPokemonID.setText(pokeList.get(position).getPokeID());
+        //tvPokemonID.setText(pokeList.get(position).getPokeID());
+        tvPokemonID.setText(pokeList.get(position).getPokeID()+"");
         tvPokemonName.setText(pokeList.get(position).getPokeName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
