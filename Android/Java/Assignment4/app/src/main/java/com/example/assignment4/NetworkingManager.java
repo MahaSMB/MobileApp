@@ -36,7 +36,7 @@ public class NetworkingManager {
         for (int i = 1; i < numberOfPokemonToRetrieve; i++) {
 
             // use the get command with this API
-            String pokemonAPIURL = "https://pokeapi.co/api/v2/pokemon/" + i ;
+            String pokemonAPIURL = "https://pokeapi.co/api/v2/pokemon/" + i + "/";
 
             //int currentPokemonID = i;
             //String currentPokemonName = pokemonAPIURL;

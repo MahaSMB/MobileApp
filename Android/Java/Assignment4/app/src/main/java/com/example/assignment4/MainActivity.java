@@ -54,6 +54,14 @@ public class MainActivity extends AppCompatActivity implements
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        for (int i = 1; i < 6; i++) {
+            //String pokemonNumber = "92";  // Replace with the desired Pokemon's ID
+            String pokemonNumber = i + "";
+            String url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
+            PokemonInfoFetcher fetcher = new PokemonInfoFetcher();
+            fetcher.execute(url);
+        }
+
 //        int listSize = pokeList.size();
 //        Log.d("List size", "List Size: " + listSize);
 //
@@ -85,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public boolean onQueryTextChange(String s) {
                 if (s.length() > 2){
-                    networkingManager.getPokemon(s);
+                    networkingManager.getPokemon();
                 }
                 else {
                     adapter.pokeList = new ArrayList<>(0);
