@@ -22,7 +22,8 @@ public class JSONManager {
             pokemonObject.setPokeName(jsonObject.getString("name"));
             JSONObject spriteURLs = new JSONObject( jsonObject.getString("sprites") );
             String spriteFrontDefaultURL2 = spriteURLs.getString("front_default");
-            Log.d("spriteURL", "Sprite" + spriteFrontDefaultURL2);
+            pokemonObject.setPokeProfile(spriteFrontDefaultURL2);
+            Log.d("spriteURL-JSONManager", "Sprite: " + spriteFrontDefaultURL2);
             //String spriteFrontDefaultURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"; // + i + ".png";
             //pokemonObject.setPokeProfile(spriteFrontDefaultURL + pokemonObject.getPokeID() + ".png");
             //masterPokeList.add(pokemonObject);

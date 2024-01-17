@@ -1,6 +1,12 @@
 package com.example.assignment4;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.loader.ResourcesLoader;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +22,29 @@ import java.util.ArrayList;
 
 public class PokemonRecyclerAdapter extends
         RecyclerView.Adapter<PokemonRecyclerAdapter.PokemonViewHolder> {
-
+    Context context;
+    PokemonInfoFetcher pokemonInfoFetcher;
     ArrayList<Pokemon> masterPokeList;
+//
+//    @Override
+//    public void infoFetchPokemonJSONObj(String result) {
+//
+//    }
+//
+//    @Override
+//    public void networkingFinishWithBitMapImage(Bitmap bitmap) {
+//
+//    }
+//
+//    @Override
+//    public void networkingFinishWithJSONString(String result) {
+//
+//    }
+//
+//    @Override
+//    public Bitmap getBitmapFromSpriteURL(String spriteURL) {
+//        return null;
+//    }
 
     public class PokemonViewHolder extends RecyclerView.ViewHolder {
         public PokemonViewHolder(@NonNull View itemView) {
@@ -25,11 +52,12 @@ public class PokemonRecyclerAdapter extends
         }
     }
 
-    Context context;
-    //ArrayList<Pokemon> pokeList;
+    //Context context;
+
 
     interface PokemonListClickListener {
         void onPokemonSelected(Pokemon selectedPokemon);
+        Bitmap getBitmap(String spriteURL);
     }
 
     PokemonListClickListener listener;
@@ -37,6 +65,7 @@ public class PokemonRecyclerAdapter extends
     public PokemonRecyclerAdapter(Context context, ArrayList<Pokemon> pokeList) {
         this.context = context;
         this.masterPokeList = pokeList;
+
     }
 
     @NonNull
@@ -52,11 +81,17 @@ public class PokemonRecyclerAdapter extends
 
         TextView tvPokemonID = holder.itemView.findViewById(R.id.tvPokemonID);
         TextView tvPokemonName = holder.itemView.findViewById(R.id.tvPokemonName);
-        // ImageView ivPokemonProfile = holder.itemView.findViewById(R.id.ivPokemonProfile);
+        ImageView ivPokemonProfile = holder.itemView.findViewById(R.id.ivPokemonProfile);
 
-        //tvPokemonID.setText(pokeList.get(position).getPokeID());
         tvPokemonID.setText(String.valueOf(masterPokeList.get(position).getPokeID()));
         tvPokemonName.setText(masterPokeList.get(position).getPokeName());
+        String spriteURL =  masterPokeList.get(position).getPokeProfile();
+        pokemonInfoFetcher = MyApp.pokemonInfoFetcherRecView;
+        Log.d("spriteURL-PokemonRecycler", "Sprite: " + spriteURL);
+        Bitmap bitmap =  pokemonInfoFetcher.downloadImage(spriteURL);
+        Drawable bitmapDrawable = new BitmapDrawable(Resources.getSystem(), bitmap);
+        //ivPokemonProfile.setImageDrawable( bitmapDrawable );
+        ivPokemonProfile.setImageBitmap(bitmap);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

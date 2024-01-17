@@ -4,19 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class PokemonActivity extends AppCompatActivity implements
-        NetworkingManager.NetworkingInterfaceListener {
+        PokemonInfoFetcher.infoFetchListener {
 
     // This page should portray details about one particular pokemon
-
-    NetworkingManager networkingManager;
+    PokemonInfoFetcher pokemonInfoFetcher;
     JSONManager jsonManager;
 
     ArrayList<Pokemon> pokeList = new ArrayList<>(0);
     ArrayList<Pokemon> masterPokeList = new ArrayList<>(0);
+
+    TextView tvDetailsPokeID, tvDetailsPokeName;
+    ImageView ivDetailsPokeProfile;
 
 
 
@@ -24,16 +28,36 @@ public class PokemonActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon);
+        tvDetailsPokeID = findViewById(R.id.tvDetailsPokeID);
+        tvDetailsPokeName = findViewById(R.id.tvDetailsPokeName);
+        ivDetailsPokeProfile = findViewById(R.id.ivDetailsPokeProfile);
 
-        networkingManager = ((MyApp)getApplication()).networkingManager;
+
         jsonManager = ((MyApp)getApplication()).jsonManager;
-        networkingManager.listener = this;
+        //masterPokeList = ((MyApp)getApplication()).masterPokeList;
 
         Pokemon capturedPokemon = getIntent().getExtras().getParcelable("pokemon");
-        this.setTitle(capturedPokemon.pokeName.toString());
-        //networkingManager.getPokemon();
+        this.setTitle(capturedPokemon.getPokeName());
+
+        String spriteURL =  capturedPokemon.getPokeProfile();
+        pokemonInfoFetcher = MyApp.pokemonInfoFetcherRecView;
+        Bitmap bitmap =  pokemonInfoFetcher.downloadImage(spriteURL);
+
+        tvDetailsPokeID.setText( String.valueOf( capturedPokemon.getPokeID()));
+        tvDetailsPokeName.setText(capturedPokemon.getPokeName());
+        ivDetailsPokeProfile.setImageBitmap(bitmap);
 
         // wimage = findViewById(R.id.weathericon);
+    }
+
+    @Override
+    public void infoFetchPokemonJSONObj(String result) {
+
+    }
+
+    @Override
+    public void networkingFinishWithBitMapImage(Bitmap bitmap) {
+
     }
 
     @Override
@@ -45,6 +69,11 @@ public class PokemonActivity extends AppCompatActivity implements
     }
 
     @Override
+    public Bitmap getBitmapFromSpriteURL(String spriteURL) {
+        return null;
+    }
+
+
     public void networkingFinishWithBitmapImage(Bitmap bitmapPic) {
         // wimage.setImageBitmap(bitmap);
     }

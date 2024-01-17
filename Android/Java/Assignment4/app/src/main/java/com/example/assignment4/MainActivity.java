@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements
         pokemonInfoFetcher = ((MyApp)getApplication()).pokemonInfoFetcher;
 
         pokemonInfoFetcher.listener = this; // Setting the context for PokemonInfoFetcher
-
+        MyApp.pokemonInfoFetcherRecView.listener = this;
         for (int i = 1; i < 10; i++) {
             //String pokemonNumber = "92";  // Replace with the desired Pokemon's ID
             String pokemonNumber = String.valueOf(i);
@@ -121,23 +122,28 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void networkingFinishWithJSONString(String json) {
-        pokeList = jsonManager.fromJSONStringtoArrayListOfPokemon(json); // returns pokemon list read from pokeapi
-        adapter.masterPokeList = pokeList;
-        //adapter.notifyDataSetChanged();
+    public void networkingFinishWithJSONString(String spriteURL) {
+        pokemonInfoFetcher.downloadImage(spriteURL);
+        Log.d("spriteURL-Main", "Sprite: " + spriteURL);
     }
 
-//    @Override
-//    public void networkingFinishWithBitmapImage(Bitmap bitmapPic) {
-//
-//    }
+    @Override
+    public Bitmap getBitmapFromSpriteURL(String spriteURL) {
+        return null;
+    }
+
 
     @Override
     public void onPokemonSelected(Pokemon selectedPokemon) {
         // Go to pokemon details page
         Intent toPokemon = new Intent(this, PokemonActivity.class);
-        toPokemon.putExtra("city",selectedPokemon);
+        toPokemon.putExtra("pokemon",selectedPokemon);
         startActivity(toPokemon);
+    }
+
+    @Override
+    public Bitmap getBitmap(String spriteURL) {
+        return null;
     }
 
     @Override
@@ -167,6 +173,11 @@ public class MainActivity extends AppCompatActivity implements
             Log.d("MainActivity", "Error parsing JSON", e);
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void networkingFinishWithBitMapImage(Bitmap bitmap) {
+
     }
 
 }

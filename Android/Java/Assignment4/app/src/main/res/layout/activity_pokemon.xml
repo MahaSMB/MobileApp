@@ -7,16 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".PokemonActivity">
 
+    <ImageView
+        android:id="@+id/ivDetailsPokeProfile"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        />
+
     <TextView
         android:id="@+id/tvDetailsPokeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Pokemon name"
-        android:text="charizard"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideline"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1"
         />
 
     <TextView
@@ -24,10 +35,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Pokemon id"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDetailsPokeName"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1"
          />
 
 

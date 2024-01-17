@@ -1,5 +1,7 @@
 package com.example.assignment4;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -19,7 +21,9 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
 
     interface infoFetchListener {
         void infoFetchPokemonJSONObj(String result);
+        void networkingFinishWithBitMapImage(Bitmap bitmap);
         void networkingFinishWithJSONString(String result);
+        Bitmap getBitmapFromSpriteURL(String spriteURL);
     }
 
     infoFetchListener listener;
@@ -100,5 +104,33 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
 //    String url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
 //    PokemonInfoFetcher fetcher = new PokemonInfoFetcher();
 //    fetcher.execute(url);
+    }
+
+
+    Bitmap downloadImage(String spriteURL){
+
+        MyApp.executorService.execute(new Runnable() {
+            //String iconurl = spriteURL;
+            @Override
+            public void run() {
+                InputStream inputStream = null;
+                try {
+                    inputStream = (InputStream) new URL(spriteURL).getContent();
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    MyApp.mainhandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.networkingFinishWithBitMapImage(bitmap);
+
+                        }
+                    });
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        return listener.getBitmapFromSpriteURL(spriteURL);
     }
 }
