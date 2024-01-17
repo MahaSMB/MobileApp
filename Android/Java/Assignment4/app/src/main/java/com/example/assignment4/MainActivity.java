@@ -1,5 +1,7 @@
 package com.example.assignment4;
 
+import static com.example.assignment4.MyApp.pokemonJSONObject;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -7,30 +9,33 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Button;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
-        NetworkingManager.NetworkingInterfaceListener,
         PokemonRecyclerAdapter.PokemonListClickListener,
-        DatabaseManager.DatabaseManagerInterfaceListener {
+        DatabaseManager.DatabaseManagerInterfaceListener,
+        PokemonInfoFetcher.infoFetchListener {
 
-    NetworkingManager networkingManager;
+    PokemonInfoFetcher pokemonInfoFetcher;
+    Pokemon newPokemonFromJSON;
     JSONManager jsonManager;
     PokemonRecyclerAdapter adapter;
     RecyclerView recyclerView;
+    ArrayList<Pokemon> masterPokeList = new ArrayList<>(0);
     ArrayList<Pokemon> pokeList = new ArrayList<>(0);
 
     @Override
@@ -39,42 +44,33 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState != null) {
-            pokeList = savedInstanceState.getParcelableArrayList("pokeList");
+            masterPokeList = savedInstanceState.getParcelableArrayList("masterPokeList");
         }
-        networkingManager = ((MyApp)getApplication()).networkingManager;
         jsonManager = ((MyApp)getApplication()).jsonManager;
-        networkingManager.listener = this;
-//        for (int i = 0; i < 6; i++) {
-//            String pokeURL =  "https://pokeapi.co/api/v2/pokemon/${i}/";
-//            Log.d("test", "testing " + pokeURL);
-//        }
-        adapter = new PokemonRecyclerAdapter(this, pokeList);
+
+        masterPokeList = ((MyApp)getApplication()).masterPokeList;
+        pokemonInfoFetcher = ((MyApp)getApplication()).pokemonInfoFetcher;
+
+        pokemonInfoFetcher.listener = this; // Setting the context for PokemonInfoFetcher
+
+        for (int i = 1; i < 10; i++) {
+            //String pokemonNumber = "92";  // Replace with the desired Pokemon's ID
+            String pokemonNumber = String.valueOf(i);
+            String url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
+            PokemonInfoFetcher fetcher = new PokemonInfoFetcher();
+            fetcher.listener = this;
+            Log.d("PokemonCapture", "" + pokemonNumber);
+            fetcher.execute(url);
+            //Pokemon newPokemon = new Pokemon(i);
+            //masterPokeList.add(newPokemon);
+        }
+
+        adapter = new PokemonRecyclerAdapter(this, masterPokeList);
         adapter.listener = this;
         recyclerView = findViewById(R.id.recviewPokemon);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
-        for (int i = 1; i < 6; i++) {
-            //String pokemonNumber = "92";  // Replace with the desired Pokemon's ID
-            String pokemonNumber = i + "";
-            String url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
-            PokemonInfoFetcher fetcher = new PokemonInfoFetcher();
-            fetcher.execute(url);
-        }
-
-//        int listSize = pokeList.size();
-//        Log.d("List size", "List Size: " + listSize);
-//
-//        for (int i = 0; i < 6; i ++) {
-//            Pokemon newPokemon = new Pokemon(i);
-//            pokeList.add(newPokemon);
-//        }
-//
-//        int listSizeAfter = pokeList.size();
-//        Log.d("List size", "List Size: " + listSizeAfter);
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,10 +89,12 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public boolean onQueryTextChange(String s) {
                 if (s.length() > 2){
-                    networkingManager.getPokemon();
+                    //networkingManager.getPokemon();
+                    // ******************** INCOMPLETE ************************************ /
+                    pokemonInfoFetcher.onPostExecute(s);
                 }
                 else {
-                    adapter.pokeList = new ArrayList<>(0);
+                    adapter.masterPokeList = ((MyApp)getApplication()).masterPokeList;
                     adapter.notifyDataSetChanged();
                 }
                 return false;
@@ -124,15 +122,15 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void networkingFinishWithJSONString(String json) {
-        pokeList = jsonManager.fromJSONtoPokemonObj(json); // returns pokemon list read from pokeapi
-        adapter.pokeList = pokeList;
-        adapter.notifyDataSetChanged();
+        pokeList = jsonManager.fromJSONStringtoArrayListOfPokemon(json); // returns pokemon list read from pokeapi
+        adapter.masterPokeList = pokeList;
+        //adapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void networkingFinishWithBitmapImage(Bitmap bitmapPic) {
-
-    }
+//    @Override
+//    public void networkingFinishWithBitmapImage(Bitmap bitmapPic) {
+//
+//    }
 
     @Override
     public void onPokemonSelected(Pokemon selectedPokemon) {
@@ -151,8 +149,24 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void databaseGetListOfPokemon(List<Pokemon> pokemonList) {
         //adapter = new PokemonRecyclerAdapter(this, (ArrayList<Pokemon>) pokemonList);
-        adapter = new PokemonRecyclerAdapter(this, pokeList);
+        adapter = new PokemonRecyclerAdapter(this, masterPokeList);
         recyclerView.setAdapter(adapter);
         adapter.listener = this;
+        //adapter.notifyDataSetChanged();
     }
+
+    public void infoFetchPokemonJSONObj(String result){
+        try {
+            JSONObject pokemonJSONObj = new JSONObject(result);
+            newPokemonFromJSON = jsonManager.fromJSONObjectToPokemonObj(pokemonJSONObj);
+            ((MyApp) getApplication()).masterPokeList.add(newPokemonFromJSON);
+            adapter.masterPokeList = ((MyApp) getApplication()).masterPokeList;
+            adapter.notifyDataSetChanged();
+        }
+        catch (JSONException e) {
+            Log.d("MainActivity", "Error parsing JSON", e);
+            e.printStackTrace();
+        }
+    }
+
 }

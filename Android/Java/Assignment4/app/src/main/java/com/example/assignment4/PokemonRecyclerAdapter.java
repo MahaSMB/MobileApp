@@ -10,10 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class PokemonRecyclerAdapter extends
         RecyclerView.Adapter<PokemonRecyclerAdapter.PokemonViewHolder> {
+
+    ArrayList<Pokemon> masterPokeList;
 
     public class PokemonViewHolder extends RecyclerView.ViewHolder {
         public PokemonViewHolder(@NonNull View itemView) {
@@ -22,7 +26,7 @@ public class PokemonRecyclerAdapter extends
     }
 
     Context context;
-    ArrayList<Pokemon> pokeList;
+    //ArrayList<Pokemon> pokeList;
 
     interface PokemonListClickListener {
         void onPokemonSelected(Pokemon selectedPokemon);
@@ -32,7 +36,7 @@ public class PokemonRecyclerAdapter extends
 
     public PokemonRecyclerAdapter(Context context, ArrayList<Pokemon> pokeList) {
         this.context = context;
-        this.pokeList = pokeList;
+        this.masterPokeList = pokeList;
     }
 
     @NonNull
@@ -51,13 +55,13 @@ public class PokemonRecyclerAdapter extends
         // ImageView ivPokemonProfile = holder.itemView.findViewById(R.id.ivPokemonProfile);
 
         //tvPokemonID.setText(pokeList.get(position).getPokeID());
-        tvPokemonID.setText(pokeList.get(position).getPokeID()+"");
-        tvPokemonName.setText(pokeList.get(position).getPokeName());
+        tvPokemonID.setText(String.valueOf(masterPokeList.get(position).getPokeID()));
+        tvPokemonName.setText(masterPokeList.get(position).getPokeName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onPokemonSelected(pokeList.get(holder.getAdapterPosition()));
+                listener.onPokemonSelected(masterPokeList.get(holder.getAdapterPosition()));
             }
         });
         /*
@@ -67,6 +71,6 @@ public class PokemonRecyclerAdapter extends
 
     @Override
     public int getItemCount() {
-        return pokeList.size();
+        return masterPokeList.size();
     }
 }

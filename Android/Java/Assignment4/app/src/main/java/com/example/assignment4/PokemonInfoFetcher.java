@@ -18,7 +18,8 @@ import java.util.ArrayList;
 public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
 
     interface infoFetchListener {
-        void infoFetchPokemonJSONObj(Pokemon pokemon);
+        void infoFetchPokemonJSONObj(String result);
+        void networkingFinishWithJSONString(String result);
     }
 
     infoFetchListener listener;
@@ -46,6 +47,8 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
         return result;
     }
 
+
+
     public void onPostExecute(String result) {
 
         ArrayList<Pokemon> masterPokeList = new ArrayList<>();
@@ -57,13 +60,22 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
             String pokeName = pokemonJSONObj.getString("name");
             int pokeID = pokemonJSONObj.getInt("id");
 
-            JSONObject spriteURLs = new JSONObject(pokemonJSONObj.getString("sprites") );
+            JSONObject spriteURLs = new JSONObject(pokemonJSONObj.getString("sprites"));
             String spriteFrontDefaultURL = spriteURLs.getString("front_default");
             String pokeProfile = spriteFrontDefaultURL + pokeID + ".png";
 
             Pokemon newPokemon = new Pokemon(pokeID, pokeName, pokeProfile);
             masterPokeList.add(newPokemon);
-            //listener.infoFetchPokemonJSONObj(newPokemon);
+            //listener.infoFetchPokemonJSONObj(result);
+            //listener.networkingFinishWithJSONString(result);
+
+            MyApp.mainhandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    listener.infoFetchPokemonJSONObj(result);
+                    //listener.networkingFinishWithJSONString(result);
+                }
+            });
 
             int height = pokemonJSONObj.getInt("height");
             int weight = pokemonJSONObj.getInt("weight");
@@ -79,16 +91,14 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
                 Log.d("PokemonInfo", "Move: " + moveName);
             }
 
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             Log.e("PokemonInfoFetcher", "Error parsing JSON", e);
         }
-        //return masterPokeList;
-    }
 
-    // The following goes in Main Activity
+        // The following goes in Main Activity
 //    String pokemonNumber = "1";  // Replace with the desired Pokemon's ID
 //    String url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
 //    PokemonInfoFetcher fetcher = new PokemonInfoFetcher();
 //    fetcher.execute(url);
+    }
 }
