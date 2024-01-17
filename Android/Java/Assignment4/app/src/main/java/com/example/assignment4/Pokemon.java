@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -12,13 +13,16 @@ import androidx.room.PrimaryKey;
 public class Pokemon implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     int pokeID;
+
+    @ColumnInfo(name = "pokename")
     String pokeName;
+
+    @ColumnInfo(name = "spriteurl")
     String pokeProfile;
 
     public void setPokeName(String pokeName) {
         this.pokeName = pokeName;
     }
-
     public void setPokeProfile(String pokeProfile) {
         this.pokeProfile = pokeProfile;
     }
@@ -36,17 +40,12 @@ public class Pokemon implements Parcelable {
         this.pokeID = pokeID;
     }
 
-    /*
-
-        public City(String cityRow){
-      String[] allCityNames =  cityRow.split(",");
-      this.city = allCityNames[0];
-      this.state = allCityNames[1];
-      this.country = allCityNames[2];
+      public Pokemon(String pokemonRow) {
+      String[] allPokemonInfo =  pokemonRow.split(",");
+      this.pokeID = Integer.parseInt(allPokemonInfo[0]);
+      this.pokeName = allPokemonInfo[1];
+      this.pokeProfile = allPokemonInfo[2];
     }
-    See if I need to implement this
-
-     */
 
     protected Pokemon(Parcel in) {
         pokeID = in.readInt();

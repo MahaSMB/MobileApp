@@ -3,6 +3,7 @@ package com.example.assignment4;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.v4.os.IResultReceiver;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -24,6 +25,8 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
         void networkingFinishWithBitMapImage(Bitmap bitmap);
         void networkingFinishWithJSONString(String result);
         Bitmap getBitmapFromSpriteURL(String spriteURL);
+
+        //int searchForPokemonID(String jsonReponse);
     }
 
     infoFetchListener listener;
@@ -52,6 +55,11 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
     }
 
 
+    public int searchForPokemon(String searchQuery) {
+        int id = 0;
+        //listener.searchForPokemonID(result);
+        return id;
+    }
 
     public void onPostExecute(String result) {
 
@@ -89,11 +97,11 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
             // To get the names of all moves:
             JSONArray moves = pokemonJSONObj.getJSONArray("moves");
 
-            for (int i = 0; i < moves.length(); i++) {
-                JSONObject move = moves.getJSONObject(i).getJSONObject("move");
-                String moveName = move.getString("name");
-                Log.d("PokemonInfo", "Move: " + moveName);
-            }
+//            for (int i = 0; i < moves.length(); i++) {
+//                JSONObject move = moves.getJSONObject(i).getJSONObject("move");
+//                String moveName = move.getString("name");
+//                Log.d("PokemonInfo", "Move: " + moveName);
+//            }
 
         } catch (JSONException e) {
             Log.e("PokemonInfoFetcher", "Error parsing JSON", e);
@@ -121,7 +129,6 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
                         @Override
                         public void run() {
                             listener.networkingFinishWithBitMapImage(bitmap);
-
                         }
                     });
                     inputStream.close();

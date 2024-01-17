@@ -31,7 +31,12 @@ public class MainActivity extends AppCompatActivity implements
         DatabaseManager.DatabaseManagerInterfaceListener,
         PokemonInfoFetcher.infoFetchListener {
 
+    String searchQuery;
+
     PokemonInfoFetcher pokemonInfoFetcher;
+    DatabaseManager databaseManager;
+
+    PokeDatabase pokeDatabase;
     Pokemon newPokemonFromJSON;
     JSONManager jsonManager;
     PokemonRecyclerAdapter adapter;
@@ -48,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements
             masterPokeList = savedInstanceState.getParcelableArrayList("masterPokeList");
         }
         jsonManager = ((MyApp)getApplication()).jsonManager;
+        databaseManager = ((MyApp)getApplication()).databaseManager;
+
+
 
         masterPokeList = ((MyApp)getApplication()).masterPokeList;
         pokemonInfoFetcher = ((MyApp)getApplication()).pokemonInfoFetcher;
@@ -65,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements
             //Pokemon newPokemon = new Pokemon(i);
             //masterPokeList.add(newPokemon);
         }
+        databaseManager.getPokeDatabase(this);
+        databaseManager.listener = this;
 
         adapter = new PokemonRecyclerAdapter(this, masterPokeList);
         adapter.listener = this;
@@ -88,11 +98,21 @@ public class MainActivity extends AppCompatActivity implements
 
             @SuppressLint("NotifyDataSetChanged")
             @Override
-            public boolean onQueryTextChange(String s) {
-                if (s.length() > 2){
+            public boolean onQueryTextChange(String searchQuery) {
+                if (searchQuery.length() > 2){
                     //networkingManager.getPokemon();
+                    int pokemonNumber = databaseSearchForPokemonByName( (List<Pokemon>) masterPokeList);
+
+                    // I have to search the database here
+
+                    String url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
+                    PokemonInfoFetcher fetcher = new PokemonInfoFetcher();
+                    //fetcher.listener = this;
+                    Log.d("PokemonCapture-Search", "" + pokemonNumber);
+                    fetcher.execute(url);
+
                     // ******************** INCOMPLETE ************************************ /
-                    pokemonInfoFetcher.onPostExecute(s);
+                    //pokemonInfoFetcher.onPostExecute(s);
                 }
                 else {
                     adapter.masterPokeList = ((MyApp)getApplication()).masterPokeList;
@@ -149,22 +169,28 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-        outState.putParcelableArrayList("pokeList", pokeList);
+        outState.putParcelableArrayList("pokeList", masterPokeList);
     }
 
     @Override
     public void databaseGetListOfPokemon(List<Pokemon> pokemonList) {
-        //adapter = new PokemonRecyclerAdapter(this, (ArrayList<Pokemon>) pokemonList);
-        adapter = new PokemonRecyclerAdapter(this, masterPokeList);
-        recyclerView.setAdapter(adapter);
+
+        adapter = new PokemonRecyclerAdapter(this, (ArrayList<Pokemon>) masterPokeList);
+        pokeDatabase.setAdapter(adapter); // this method is abstract, needs an implementation
         adapter.listener = this;
-        //adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public int databaseSearchForPokemonByName(List<Pokemon> pokemonList) {
+        return databaseManager.searchForPokemonInBGThread(searchQuery);
     }
 
     public void infoFetchPokemonJSONObj(String result){
         try {
             JSONObject pokemonJSONObj = new JSONObject(result);
             newPokemonFromJSON = jsonManager.fromJSONObjectToPokemonObj(pokemonJSONObj);
+            databaseManager.insertPokemonBackgroundThread(newPokemonFromJSON);
             ((MyApp) getApplication()).masterPokeList.add(newPokemonFromJSON);
             adapter.masterPokeList = ((MyApp) getApplication()).masterPokeList;
             adapter.notifyDataSetChanged();
