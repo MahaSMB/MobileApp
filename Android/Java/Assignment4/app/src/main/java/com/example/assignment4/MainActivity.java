@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements
     PokemonRecyclerAdapter adapter;
     RecyclerView recyclerView;
     ArrayList<Pokemon> masterPokeList = new ArrayList<>(0);
-    ArrayList<Pokemon> pokeList = new ArrayList<>(0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements
         }
         jsonManager = ((MyApp)getApplication()).jsonManager;
         databaseManager = ((MyApp)getApplication()).databaseManager;
-
-
 
         masterPokeList = ((MyApp)getApplication()).masterPokeList;
         pokemonInfoFetcher = ((MyApp)getApplication()).pokemonInfoFetcher;
@@ -99,18 +96,11 @@ public class MainActivity extends AppCompatActivity implements
             public boolean onQueryTextChange(String searchQuery) {
                 if (searchQuery.length() > 2){
                     //networkingManager.getPokemon();
-                    int pokemonNumber = databaseSearchForPokemonByName( (List<Pokemon>) masterPokeList);
+                    //int pokemonNumber = databaseSearchForPokemonByName( (List<Pokemon>) masterPokeList);
 
-                    // I have to search the database here
-
-                    String url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
-                    PokemonInfoFetcher fetcher = new PokemonInfoFetcher();
-                    //fetcher.listener = this;
-                    Log.d("PokemonCapture-Search", "" + pokemonNumber);
-                    fetcher.execute(url);
-
-                    // ******************** INCOMPLETE ************************************ /
-                    //pokemonInfoFetcher.onPostExecute(s);
+                    Intent foundPokemon = new Intent(MainActivity.this, PokemonActivity.class);
+                    foundPokemon.putExtra("pokemon",searchQuery);
+                    startActivity(foundPokemon);
                 }
                 else {
                     adapter.masterPokeList = ((MyApp)getApplication()).masterPokeList;
@@ -139,17 +129,6 @@ public class MainActivity extends AppCompatActivity implements
         super.onResume();
     }
 
-    @Override
-    public void networkingFinishWithJSONString(String spriteURL) {
-        pokemonInfoFetcher.downloadImage(spriteURL);
-        Log.d("spriteURL-Main", "Sprite: " + spriteURL);
-    }
-
-    @Override
-    public Bitmap getBitmapFromSpriteURL(String spriteURL) {
-        return null;
-    }
-
 
     @Override
     public void onPokemonSelected(Pokemon selectedPokemon) {
@@ -159,10 +138,6 @@ public class MainActivity extends AppCompatActivity implements
         startActivity(toPokemon);
     }
 
-    @Override
-    public Bitmap getBitmap(String spriteURL) {
-        return null;
-    }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
@@ -199,9 +174,5 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void networkingFinishWithBitMapImage(Bitmap bitmap) {
-
-    }
 
 }

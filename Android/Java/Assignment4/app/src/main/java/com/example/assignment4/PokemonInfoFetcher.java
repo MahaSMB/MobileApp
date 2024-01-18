@@ -22,11 +22,7 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
 
     interface infoFetchListener {
         void infoFetchPokemonJSONObj(String result);
-        void networkingFinishWithBitMapImage(Bitmap bitmap);
-        void networkingFinishWithJSONString(String result);
-        Bitmap getBitmapFromSpriteURL(String spriteURL);
 
-        //int searchForPokemonID(String jsonReponse);
     }
 
     infoFetchListener listener;
@@ -54,13 +50,6 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
         return result;
     }
 
-
-    public int searchForPokemon(String searchQuery) {
-        int id = 0;
-        //listener.searchForPokemonID(result);
-        return id;
-    }
-
     public void onPostExecute(String result) {
 
         ArrayList<Pokemon> masterPokeList = new ArrayList<>();
@@ -78,14 +67,11 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
 
             Pokemon newPokemon = new Pokemon(pokeID, pokeName, pokeProfile);
             masterPokeList.add(newPokemon);
-            //listener.infoFetchPokemonJSONObj(result);
-            //listener.networkingFinishWithJSONString(result);
 
             MyApp.mainhandler.post(new Runnable() {
                 @Override
                 public void run() {
                     listener.infoFetchPokemonJSONObj(result);
-                    //listener.networkingFinishWithJSONString(result);
                 }
             });
 
@@ -107,37 +93,6 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
             Log.e("PokemonInfoFetcher", "Error parsing JSON", e);
         }
 
-        // The following goes in Main Activity
-//    String pokemonNumber = "1";  // Replace with the desired Pokemon's ID
-//    String url = "https://pokeapi.co/api/v2/pokemon/" + pokemonNumber + "/";
-//    PokemonInfoFetcher fetcher = new PokemonInfoFetcher();
-//    fetcher.execute(url);
     }
 
-
-    Bitmap downloadImage(String spriteURL){
-
-        MyApp.executorService.execute(new Runnable() {
-            //String iconurl = spriteURL;
-            @Override
-            public void run() {
-                InputStream inputStream = null;
-                try {
-                    inputStream = (InputStream) new URL(spriteURL).getContent();
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    MyApp.mainhandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            listener.networkingFinishWithBitMapImage(bitmap);
-                        }
-                    });
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-        return listener.getBitmapFromSpriteURL(spriteURL);
-    }
 }

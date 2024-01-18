@@ -1,11 +1,7 @@
 package com.example.assignment4;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.loader.ResourcesLoader;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,28 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class PokemonRecyclerAdapter extends
         RecyclerView.Adapter<PokemonRecyclerAdapter.PokemonViewHolder> {
     Context context;
-    PokemonInfoFetcher pokemonInfoFetcher;
     ArrayList<Pokemon> masterPokeList;
-
     public class PokemonViewHolder extends RecyclerView.ViewHolder {
         public PokemonViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
 
-    //Context context;
-
-
     interface PokemonListClickListener {
         void onPokemonSelected(Pokemon selectedPokemon);
-        Bitmap getBitmap(String spriteURL);
     }
 
     PokemonListClickListener listener;
@@ -76,9 +65,7 @@ public class PokemonRecyclerAdapter extends
                 listener.onPokemonSelected(masterPokeList.get(holder.getAdapterPosition()));
             }
         });
-        /*
-        * Work on this some more
-        * */
+
     }
 
     @Override

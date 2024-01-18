@@ -35,21 +35,4 @@ public class JSONManager {
         return pokemonObject;
     }
 
-    // Not sure I need the function below
-     ArrayList<Pokemon> fromJSONStringtoArrayListOfPokemon(String json) {
-        ArrayList<Pokemon> list = new ArrayList<>(0);
-
-        try {
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                list.add(new Pokemon(Integer.parseInt(jsonArray.get(i).toString())));
-            }
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return list;
-    }
-
 }

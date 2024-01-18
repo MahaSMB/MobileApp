@@ -24,8 +24,6 @@ public class PokemonActivity extends AppCompatActivity implements
     TextView tvDetailsPokeID, tvDetailsPokeName;
     ImageView ivDetailsPokeProfile;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +40,11 @@ public class PokemonActivity extends AppCompatActivity implements
 
         String spriteURL =  capturedPokemon.getPokeProfile();
         pokemonInfoFetcher = MyApp.pokemonInfoFetcherRecView;
-        Bitmap bitmap =  pokemonInfoFetcher.downloadImage(spriteURL);
+        //Bitmap bitmap =  pokemonInfoFetcher.downloadImage(spriteURL);
 
         tvDetailsPokeID.setText( String.valueOf( capturedPokemon.getPokeID()));
         tvDetailsPokeName.setText(capturedPokemon.getPokeName());
-        ivDetailsPokeProfile.setImageBitmap(bitmap);
+        //ivDetailsPokeProfile.setImageBitmap(bitmap);
         Glide.with(this)
                 .load(spriteURL)
                 .apply(new RequestOptions()
@@ -62,26 +60,4 @@ public class PokemonActivity extends AppCompatActivity implements
 
     }
 
-    @Override
-    public void networkingFinishWithBitMapImage(Bitmap bitmap) {
-
-    }
-
-    @Override
-    public void networkingFinishWithJSONString(String json) {
-//        pokeList = jsonManager.fromJSONtoArrayListOfPokemon(json);
-//        // Get the rest of the details for this particular pokemon
-//        ArrayList masterPokeList = ((MyApp)getApplication()).jsonManager.fromJSONtoArrayListOfPokemon(json);
-//        networkingManager.getPokemon();
-    }
-
-    @Override
-    public Bitmap getBitmapFromSpriteURL(String spriteURL) {
-        return null;
-    }
-
-
-    public void networkingFinishWithBitmapImage(Bitmap bitmapPic) {
-        // wimage.setImageBitmap(bitmap);
-    }
 }
