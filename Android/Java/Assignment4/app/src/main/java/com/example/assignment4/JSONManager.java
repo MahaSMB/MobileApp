@@ -20,6 +20,8 @@ public class JSONManager {
 
             pokemonObject.setPokeID(jsonObject.getInt("id"));
             pokemonObject.setPokeName(jsonObject.getString("name"));
+            pokemonObject.setHeight(jsonObject.getInt("height"));
+            pokemonObject.setWeight(jsonObject.getInt("weight"));
             JSONObject spriteURLs = new JSONObject( jsonObject.getString("sprites") );
             String spriteFrontDefaultURL2 = spriteURLs.getString("front_default");
             pokemonObject.setPokeProfile(spriteFrontDefaultURL2);

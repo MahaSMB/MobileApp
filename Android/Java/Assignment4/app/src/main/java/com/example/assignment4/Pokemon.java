@@ -13,9 +13,30 @@ import androidx.room.PrimaryKey;
 public class Pokemon implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     int pokeID;
-
     @ColumnInfo(name = "pokename")
     String pokeName;
+
+    @ColumnInfo(name = "height")
+    int height;
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    @ColumnInfo(name = "weight")
+    int weight;
 
     @ColumnInfo(name = "spriteurl")
     String pokeProfile;
@@ -30,9 +51,11 @@ public class Pokemon implements Parcelable {
     public Pokemon() {
     }
 
-    public Pokemon(int pokeID, String pokeName, String pokeProfile) {
+    public Pokemon(int pokeID, String pokeName, int height, int weight, String pokeProfile) {
         this.pokeID = pokeID;
         this.pokeName = pokeName;
+        this.height = height;
+        this.weight = weight;
         this.pokeProfile = pokeProfile;
     }
 
@@ -70,10 +93,6 @@ public class Pokemon implements Parcelable {
         return pokeProfile;
     }
 
-
-
-
-
     // sprite is in png
     // "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/35.png",
 
@@ -88,7 +107,6 @@ public class Pokemon implements Parcelable {
     }
 
     public String getPokeName() {
-
         return pokeName;
     }
 

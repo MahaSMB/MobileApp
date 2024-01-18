@@ -20,7 +20,7 @@ public class DatabaseManager {
     PokeDatabase getPokeDatabase(Context context) {
         if (pokeDatabase == null) {
             pokeDatabase = Room.databaseBuilder(context,
-                    PokeDatabase.class, "database-Pokemon").build();
+                    PokeDatabase.class, "database-Pokemon").fallbackToDestructiveMigration().build();
         }
         return pokeDatabase;
     }

@@ -52,12 +52,16 @@ public class PokemonRecyclerAdapter extends
         TextView tvPokemonID = holder.itemView.findViewById(R.id.tvPokemonID);
         TextView tvPokemonName = holder.itemView.findViewById(R.id.tvPokemonName);
         ImageView ivPokemonProfile = holder.itemView.findViewById(R.id.ivPokemonProfile);
+        TextView tvHeight = holder.itemView.findViewById(R.id.tvHeight);
+        TextView tvWeight = holder.itemView.findViewById(R.id.tvWeight);
 
         tvPokemonID.setText(String.valueOf(masterPokeList.get(position).getPokeID()));
         tvPokemonName.setText(masterPokeList.get(position).getPokeName());
         String spriteURL =  masterPokeList.get(position).getPokeProfile();
 
         Glide.with(holder.itemView.getContext()).load(spriteURL).into(ivPokemonProfile);
+        tvHeight.setText(String.valueOf(masterPokeList.get(position).getHeight()));
+        tvWeight.setText(String.valueOf(masterPokeList.get(position).getWeight()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

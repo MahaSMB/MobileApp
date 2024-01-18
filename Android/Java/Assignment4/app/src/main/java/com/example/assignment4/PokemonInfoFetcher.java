@@ -65,8 +65,8 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
             String spriteFrontDefaultURL = spriteURLs.getString("front_default");
             String pokeProfile = spriteFrontDefaultURL + pokeID + ".png";
 
-            Pokemon newPokemon = new Pokemon(pokeID, pokeName, pokeProfile);
-            masterPokeList.add(newPokemon);
+            //Pokemon newPokemon = new Pokemon(pokeID, pokeName, pokeProfile);
+            //masterPokeList.add(newPokemon);
 
             MyApp.mainhandler.post(new Runnable() {
                 @Override
