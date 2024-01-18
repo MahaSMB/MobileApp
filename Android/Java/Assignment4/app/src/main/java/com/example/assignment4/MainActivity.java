@@ -32,10 +32,8 @@ public class MainActivity extends AppCompatActivity implements
         PokemonInfoFetcher.infoFetchListener {
 
     String searchQuery;
-
     PokemonInfoFetcher pokemonInfoFetcher;
     DatabaseManager databaseManager;
-
     PokeDatabase pokeDatabase;
     Pokemon newPokemonFromJSON;
     JSONManager jsonManager;

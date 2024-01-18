@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONObject;
 
@@ -25,26 +26,6 @@ public class PokemonRecyclerAdapter extends
     Context context;
     PokemonInfoFetcher pokemonInfoFetcher;
     ArrayList<Pokemon> masterPokeList;
-//
-//    @Override
-//    public void infoFetchPokemonJSONObj(String result) {
-//
-//    }
-//
-//    @Override
-//    public void networkingFinishWithBitMapImage(Bitmap bitmap) {
-//
-//    }
-//
-//    @Override
-//    public void networkingFinishWithJSONString(String result) {
-//
-//    }
-//
-//    @Override
-//    public Bitmap getBitmapFromSpriteURL(String spriteURL) {
-//        return null;
-//    }
 
     public class PokemonViewHolder extends RecyclerView.ViewHolder {
         public PokemonViewHolder(@NonNull View itemView) {
@@ -86,12 +67,8 @@ public class PokemonRecyclerAdapter extends
         tvPokemonID.setText(String.valueOf(masterPokeList.get(position).getPokeID()));
         tvPokemonName.setText(masterPokeList.get(position).getPokeName());
         String spriteURL =  masterPokeList.get(position).getPokeProfile();
-        pokemonInfoFetcher = MyApp.pokemonInfoFetcherRecView;
-        Log.d("spriteURL-PokemonRecycler", "Sprite: " + spriteURL);
-        Bitmap bitmap =  pokemonInfoFetcher.downloadImage(spriteURL);
-        Drawable bitmapDrawable = new BitmapDrawable(Resources.getSystem(), bitmap);
-        //ivPokemonProfile.setImageDrawable( bitmapDrawable );
-        ivPokemonProfile.setImageBitmap(bitmap);
+
+        Glide.with(holder.itemView.getContext()).load(spriteURL).into(ivPokemonProfile);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

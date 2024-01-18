@@ -2,6 +2,7 @@ package com.example.assignment4;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 @Dao
 public interface PokeDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addNewPokemon(Pokemon pokemon);
 
     @Query("select * from Pokemon")

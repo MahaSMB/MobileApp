@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -32,7 +34,6 @@ public class PokemonActivity extends AppCompatActivity implements
         tvDetailsPokeName = findViewById(R.id.tvDetailsPokeName);
         ivDetailsPokeProfile = findViewById(R.id.ivDetailsPokeProfile);
 
-
         jsonManager = ((MyApp)getApplication()).jsonManager;
         //masterPokeList = ((MyApp)getApplication()).masterPokeList;
 
@@ -46,8 +47,14 @@ public class PokemonActivity extends AppCompatActivity implements
         tvDetailsPokeID.setText( String.valueOf( capturedPokemon.getPokeID()));
         tvDetailsPokeName.setText(capturedPokemon.getPokeName());
         ivDetailsPokeProfile.setImageBitmap(bitmap);
+        Glide.with(this)
+                .load(spriteURL)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.pokeball_background) //placeholder image
+                        .error(R.drawable.error_image_foreground)  //error image in case of a loading error
+                )
+                .into(ivDetailsPokeProfile);
 
-        // wimage = findViewById(R.id.weathericon);
     }
 
     @Override
