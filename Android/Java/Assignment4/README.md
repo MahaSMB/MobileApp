@@ -1,14 +1,17 @@
 # Android Assignment 4
 
 ## YouTube link showcasing app:
-inprogress
+
 
 ## Project Pictures
 
-![inprogress](screenshots/)
+![Main Activity showing list of pokemon ](screenshots/Assignment4-MainActivity.png)
+
+![Pokemon Activity showing selected pokemon in more detail ](screenshots/Assignment4-PokemonDetailsActivity.png)
 
 
-### Landscape
 
-![in progress ](screenshots/)
+
+
+
 

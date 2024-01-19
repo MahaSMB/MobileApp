@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements
 
         pokemonInfoFetcher.listener = this; // Setting the context for PokemonInfoFetcher
         MyApp.pokemonInfoFetcherRecView.listener = this;
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 152; i++) {
             //String pokemonNumber = "92";  // Replace with the desired Pokemon's ID
             String pokemonNumber = String.valueOf(i);
 
