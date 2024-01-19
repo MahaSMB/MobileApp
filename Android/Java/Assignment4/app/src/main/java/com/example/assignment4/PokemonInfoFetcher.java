@@ -54,16 +54,16 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
 
         ArrayList<Pokemon> masterPokeList = new ArrayList<>();
 
-        try {
-            JSONObject pokemonJSONObj = new JSONObject(result);
-            // Process the JSON data as needed
-            // For example, to get the height and weight:
-            String pokeName = pokemonJSONObj.getString("name");
-            int pokeID = pokemonJSONObj.getInt("id");
-
-            JSONObject spriteURLs = new JSONObject(pokemonJSONObj.getString("sprites"));
-            String spriteFrontDefaultURL = spriteURLs.getString("front_default");
-            String pokeProfile = spriteFrontDefaultURL + pokeID + ".png";
+        //try {
+//            JSONObject pokemonJSONObj = new JSONObject(result);
+//            // Process the JSON data as needed
+//            // For example, to get the height and weight:
+//            String pokeName = pokemonJSONObj.getString("name");
+//            int pokeID = pokemonJSONObj.getInt("id");
+//
+//            JSONObject spriteURLs = new JSONObject(pokemonJSONObj.getString("sprites"));
+//            String spriteFrontDefaultURL = spriteURLs.getString("front_default");
+//            String pokeProfile = spriteFrontDefaultURL + pokeID + ".png";
 
             //Pokemon newPokemon = new Pokemon(pokeID, pokeName, pokeProfile);
             //masterPokeList.add(newPokemon);
@@ -75,13 +75,13 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
                 }
             });
 
-            int height = pokemonJSONObj.getInt("height");
-            int weight = pokemonJSONObj.getInt("weight");
-            Log.d("PokemonInfo", "Name:" + pokeName + ", ID: " + pokeID +
-                    ", Height: " + height + ", Weight: " + weight);
-
-            // To get the names of all moves:
-            JSONArray moves = pokemonJSONObj.getJSONArray("moves");
+//            int height = pokemonJSONObj.getInt("height");
+//            int weight = pokemonJSONObj.getInt("weight");
+//            Log.d("PokemonInfo", "Name:" + pokeName + ", ID: " + pokeID +
+//                    ", Height: " + height + ", Weight: " + weight);
+//
+//            // To get the names of all moves:
+//            JSONArray moves = pokemonJSONObj.getJSONArray("moves");
 
 //            for (int i = 0; i < moves.length(); i++) {
 //                JSONObject move = moves.getJSONObject(i).getJSONObject("move");
@@ -89,9 +89,10 @@ public class PokemonInfoFetcher extends AsyncTask<String, Void, String> {
 //                Log.d("PokemonInfo", "Move: " + moveName);
 //            }
 
-        } catch (JSONException e) {
-            Log.e("PokemonInfoFetcher", "Error parsing JSON", e);
-        }
+        //}
+//        catch (JSONException e) {
+//            Log.e("PokemonInfoFetcher", "Error parsing JSON", e);
+//        }
 
     }
 

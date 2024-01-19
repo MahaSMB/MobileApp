@@ -2,7 +2,6 @@ package com.example.assignment4;
 
 import android.content.Context;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,11 +48,11 @@ public class PokemonRecyclerAdapter extends
     @Override
     public void onBindViewHolder(@NonNull PokemonRecyclerAdapter.PokemonViewHolder holder, int position) {
 
-        TextView tvPokemonID = holder.itemView.findViewById(R.id.tvPokemonID);
-        TextView tvPokemonName = holder.itemView.findViewById(R.id.tvPokemonName);
-        ImageView ivPokemonProfile = holder.itemView.findViewById(R.id.ivPokemonProfile);
-        TextView tvHeight = holder.itemView.findViewById(R.id.tvHeight);
-        TextView tvWeight = holder.itemView.findViewById(R.id.tvWeight);
+        TextView tvPokemonID = holder.itemView.findViewById(R.id.tvMPokemonID);
+        TextView tvPokemonName = holder.itemView.findViewById(R.id.tvMPokemonName);
+        ImageView ivPokemonProfile = holder.itemView.findViewById(R.id.ivMPokemonProfile);
+        TextView tvHeight = holder.itemView.findViewById(R.id.tvMHeight);
+        TextView tvWeight = holder.itemView.findViewById(R.id.tvMWeight);
 
         tvPokemonID.setText(String.valueOf(masterPokeList.get(position).getPokeID()));
         tvPokemonName.setText(masterPokeList.get(position).getPokeName());

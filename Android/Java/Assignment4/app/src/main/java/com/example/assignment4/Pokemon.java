@@ -19,6 +19,49 @@ public class Pokemon implements Parcelable {
     @ColumnInfo(name = "height")
     int height;
 
+    @ColumnInfo(name = "weight")
+    int weight;
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    @ColumnInfo(name = "species")
+    String species;
+
+    @ColumnInfo(name = "spriteurl")
+    String pokeProfile;
+
+
+    protected Pokemon(Parcel in) {
+        pokeID = in.readInt();
+        pokeName = in.readString();
+        height = in.readInt();
+        weight = in.readInt();
+        species = in.readString();
+        pokeProfile = in.readString();
+    }
+
+    public static final Creator<Pokemon> CREATOR = new Creator<Pokemon>() {
+        @Override
+        public Pokemon createFromParcel(Parcel in) {
+            return new Pokemon(in);
+        }
+
+        @Override
+        public Pokemon[] newArray(int size) {
+            return new Pokemon[size];
+        }
+    };
+
+
+
+
+
     public int getHeight() {
         return height;
     }
@@ -35,12 +78,6 @@ public class Pokemon implements Parcelable {
         this.weight = weight;
     }
 
-    @ColumnInfo(name = "weight")
-    int weight;
-
-    @ColumnInfo(name = "spriteurl")
-    String pokeProfile;
-
     public void setPokeName(String pokeName) {
         this.pokeName = pokeName;
     }
@@ -51,13 +88,15 @@ public class Pokemon implements Parcelable {
     public Pokemon() {
     }
 
-    public Pokemon(int pokeID, String pokeName, int height, int weight, String pokeProfile) {
+    public Pokemon(int pokeID, String pokeName, int height, int weight, String species, String pokeProfile) {
         this.pokeID = pokeID;
         this.pokeName = pokeName;
         this.height = height;
         this.weight = weight;
+        this.species = species;
         this.pokeProfile = pokeProfile;
     }
+
 
     public Pokemon(int pokeID) {
         this.pokeID = pokeID;
@@ -68,25 +107,10 @@ public class Pokemon implements Parcelable {
       this.pokeID = Integer.parseInt(allPokemonInfo[0]);
       this.pokeName = allPokemonInfo[1];
       this.pokeProfile = allPokemonInfo[2];
+      this.height = Integer.parseInt(allPokemonInfo[3]);
+      this.weight = Integer.parseInt(allPokemonInfo[4]);
+      this.species = allPokemonInfo[5];
     }
-
-    protected Pokemon(Parcel in) {
-        pokeID = in.readInt();
-        pokeName = in.readString();
-        pokeProfile = in.readString();
-    }
-
-    public static final Creator<Pokemon> CREATOR = new Creator<Pokemon>() {
-        @Override
-        public Pokemon createFromParcel(Parcel in) {
-            return new Pokemon(in);
-        }
-
-        @Override
-        public Pokemon[] newArray(int size) {
-            return new Pokemon[size];
-        }
-    };
 
     public String getPokeProfile() {
 
@@ -110,8 +134,6 @@ public class Pokemon implements Parcelable {
         return pokeName;
     }
 
-
-
     @Override
     public int describeContents() {
         return 0;
@@ -121,6 +143,10 @@ public class Pokemon implements Parcelable {
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeInt(pokeID);
         parcel.writeString(pokeName);
+        parcel.writeInt(height);
+        parcel.writeInt(weight);
         parcel.writeString(pokeProfile);
+        parcel.writeString(species);
     }
+
 }

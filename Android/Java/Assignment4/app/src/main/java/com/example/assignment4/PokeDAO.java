@@ -19,4 +19,7 @@ public interface PokeDAO {
     @Query("select * from Pokemon WHERE pokename LIKE :search")
     List<Pokemon> searchForPokemonByName(String search);
 
+    @Query("select spriteurl from Pokemon WHERE pokename LIKE :search")
+    String getSpriteURL(String search);
+
 }

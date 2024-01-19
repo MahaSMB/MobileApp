@@ -2,4 +2,15 @@
 <resources>
     <string name="pokemon_front_default_sprite">Pokemon front default sprite</string>
     <string name="pokeid">ID:</string>
+    <string name="name">Name:</string>
+    <string name="height">Height (cm):</string>
+    <string name="weight">Weight (10 x kg):</string>
+    <string name="id">ID:</string>
+    <string name="pikachu">Pikachu</string>
+    <string name="_25">25</string>
+    <string name="_50">50</string>
+    <string name="_20">20</string>
+    <string name="pokemon_id">Pokemon id</string>
+    <string name="species">Species:</string>
+    <string name="pikachu_species">Pikachu</string>
 </resources>
